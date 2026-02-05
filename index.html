@@ -1,1 +1,412 @@
-<h1>Ceymer Studios</h1><p>Developer of ADIN</p> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceymer Studios - Helping the Past Understand the Future</title>
+    <meta name="description" content="Ceymer Studios creates innovative apps that bridge technology gaps and make complex concepts accessible to everyone.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --adin-green: #9dc183;
+            --adin-green-light: #c4daa8;
+            --adin-green-dark: #7aa05f;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--adin-green-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--adin-green);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--adin-green-dark);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .robot-container {
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+
+        .robot-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Apps Section */
+        .apps {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .app-card h3 {
+            color: var(--adin-green-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .app-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-live {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-coming {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .play-store-btn {
+            display: inline-block;
+            background: var(--adin-green);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .play-store-btn:hover {
+            background: var(--adin-green-dark);
+        }
+
+        .play-store-btn.disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            padding: 4rem 2rem;
+            margin: 2rem 0;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--adin-green-light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .contact {
+            margin: 2rem 0;
+        }
+
+        .contact a {
+            color: var(--adin-green-light);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-image {
+                height: 40px;
+            }
+
+            .robot-container {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo-container">
+                <img src="ceymer-logo.png" alt="Ceymer Studios Logo" class="logo-image">
+                <div class="logo">Ceymer Studios</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://sites.google.com/view/adinprivacy/home" target="_blank">Privacy</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Ceymer Studios</h1>
+                <p class="tagline">Helping the Past Understand the Future</p>
+                
+                <div class="robot-container">
+                    <img src="adin-robot.png" alt="ADIN - Your AI Tutorial Assistant">
+                </div>
+
+                <p style="font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 2rem auto;">
+                    We create innovative applications that bridge the gap between complex technology and everyday users,
+                    making the digital world accessible to everyone.
+                </p>
+            </div>
+        </section>
+
+        <section id="apps" class="apps">
+            <div class="container">
+                <h2 class="section-title">Our Apps</h2>
+                <div class="app-grid">
+                    <!-- ADIN -->
+                    <div class="app-card">
+                        <span class="app-status status-live">📱 Live on Play Store</span>
+                        <h3>ADIN</h3>
+                        <p><strong>Advanced Digital Instructional Navigator</strong></p>
+                        <p>
+                            Your AI-powered assistant for learning Android devices. ADIN provides step-by-step tutorials 
+                            in 7 languages, making technology accessible to beginners and advanced users alike.
+                        </p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
+                            <li>✨ AI-powered interactive tutorials</li>
+                            <li>🌍 Support for 7 languages</li>
+                            <li>🎨 Customizable appearance</li>
+                            <li>📚 Progress tracking</li>
+                            <li>🎯 Personalized learning experience</li>
+                        </ul>
+                        <a href="https://play.google.com/store/apps/details?id=com.zypher.adin" class="play-store-btn" target="_blank">
+                            Download on Play Store
+                        </a>
+                    </div>
+
+                    <!-- Hydrogen Line Clock -->
+                    <div class="app-card">
+                        <span class="app-status status-coming">🚀 Coming Soon</span>
+                        <h3>Hydrogen Line Clock</h3>
+                        <p><strong>Precision Timekeeping Based on Universal Constants</strong></p>
+                        <p>
+                            Experience time like never before. The Hydrogen Line Clock uses the fundamental frequency 
+                            of hydrogen atoms to provide a unique perspective on timekeeping, connecting you to the 
+                            rhythm of the universe itself.
+                        </p>
+                        <p><strong>The H₂₁ Precision Initiative:</strong></p>
+                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
+                            <li>⚛️ Based on hydrogen-line frequency</li>
+                            <li>🌌 100 Beats = 1 Earth day</li>
+                            <li>⏰ Stopwatch, timer, and alarm features</li>
+                            <li>🎨 Customizable interface</li>
+                            <li>📅 Hydrogen Era calendar (starting 1951)</li>
+                        </ul>
+                        <a href="#" class="play-store-btn disabled">
+                            Available Soon
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">About Ceymer Studios</h2>
+                    <p>
+                        At Ceymer Studios, we believe that technology should be accessible to everyone, 
+                        regardless of their technical background or age. Our mission is to create 
+                        applications that bridge the gap between complex innovations and everyday users.
+                    </p>
+                    <p>
+                        Founded by Corey Miller, Ceymer Studios focuses on developing thoughtful, 
+                        user-centered applications that make learning technology intuitive and enjoyable. 
+                        We combine artificial intelligence, clean design, and educational principles 
+                        to help people embrace the digital future.
+                    </p>
+                    <p>
+                        <em>"Helping the Past Understand the Future"</em> isn't just our tagline—it's 
+                        our commitment to making tomorrow's technology accessible today.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#apps">Apps</a>
+                <a href="#about">About</a>
+                <a href="https://sites.google.com/view/adinprivacy/home" target="_blank">Privacy Policy</a>
+                <a href="https://github.com/i-zypher" target="_blank">GitHub</a>
+            </div>
+
+            <div class="contact">
+                <p><strong>Contact:</strong> <a href="mailto:adinapporiginal@gmail.com">adinapporiginal@gmail.com</a></p>
+            </div>
+
+            <p style="margin-top: 2rem; color: var(--adin-green-light);">
+                © 2026 Corey Miller / Ceymer Studios. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
