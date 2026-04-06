@@ -3,8 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ceymer Studios - Helping the Past Understand the Future</title>
-    <meta name="description" content="Ceymer Studios creates innovative apps that bridge technology gaps and make complex concepts accessible to everyone.">
+    <title>Ceymer Studios - Innovative Android Apps | AI-Powered Technology for Everyone</title>
+    <meta name="description" content="Ceymer Studios creates innovative Android apps including ADIN (AI tutorial assistant), Your Leader (civic engagement tool), and Hydrogen Line Clock (universal timekeeping). Making technology accessible to everyone.">
+    <meta name="keywords" content="Android apps, AI tutorial, civic engagement, elected representatives, hydrogen line clock, universal time, ADIN, Your Leader, technology education, Ceymer Studios">
+    <meta name="author" content="Ceymer Studios LLC">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ceymer-studios.com/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ceymer-studios.com/">
+    <meta property="og:title" content="Ceymer Studios - Helping the Past Understand the Future">
+    <meta property="og:description" content="Innovative Android apps that bridge technology gaps. Download ADIN, Your Leader, and Hydrogen Line Clock on Google Play.">
+    <meta property="og:image" content="https://ceymer-studios.com/ceymer-logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://ceymer-studios.com/">
+    <meta property="twitter:title" content="Ceymer Studios - Helping the Past Understand the Future">
+    <meta property="twitter:description" content="Innovative Android apps that bridge technology gaps. Download ADIN, Your Leader, and Hydrogen Line Clock on Google Play.">
+    <meta property="twitter:image" content="https://ceymer-studios.com/ceymer-logo.png">
+    <meta name="twitter:site" content="@CeymerStudios">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Ceymer Studios LLC",
+      "url": "https://ceymer-studios.com",
+      "logo": "https://ceymer-studios.com/ceymer-logo.png",
+      "description": "Innovative Android app development studio creating AI-powered applications for education, civic engagement, and universal timekeeping.",
+      "founder": {
+        "@type": "Person",
+        "name": "Corey Miller"
+      },
+      "sameAs": [
+        "https://x.com/CeymerStudios",
+        "https://www.facebook.com/share/17WXnJmbTW/",
+        "https://github.com/i-zypher"
+      ],
+      "email": "contact@ceymer-studios.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "PA",
+        "addressCountry": "US"
+      }
+    }
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -172,11 +220,6 @@
             color: #155724;
         }
 
-        .status-coming {
-            background: #fff3cd;
-            color: #856404;
-        }
-
         .play-store-btn {
             display: inline-block;
             background: var(--adin-green);
@@ -190,12 +233,6 @@
 
         .play-store-btn:hover {
             background: var(--adin-green-dark);
-        }
-
-        .play-store-btn.disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            pointer-events: none;
         }
 
         /* About Section */
@@ -241,6 +278,23 @@
         }
 
         .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: var(--adin-green-light);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
             color: white;
         }
 
@@ -340,26 +394,49 @@
                         </a>
                     </div>
 
+                    <!-- Your Leader -->
+                    <div class="app-card">
+                        <span class="app-status status-live">📱 Live on Play Store</span>
+                        <h3>Your Leader</h3>
+                        <p><strong>Instantly Discover Your Elected Officials</strong></p>
+                        <p>
+                            Powered by Google Gemini AI, Your Leader makes civic engagement simple. Enter your address 
+                            and instantly discover every elected official who represents you—from local city council 
+                            to the President of the United States.
+                        </p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
+                            <li>🏛️ Find all your representatives at every level</li>
+                            <li>🤖 AI-powered with real-time search verification</li>
+                            <li>📞 Direct contact information and official websites</li>
+                            <li>🆓 Completely free to use</li>
+                            <li>🇺🇸 Know who represents you—it's the foundation of democracy</li>
+                        </ul>
+                        <a href="https://play.google.com/store/apps/details?id=net.yourleader.app" class="play-store-btn" target="_blank">
+                            Download on Play Store
+                        </a>
+                    </div>
+
                     <!-- Hydrogen Line Clock -->
                     <div class="app-card">
-                        <span class="app-status status-coming">🚀 Coming Soon</span>
+                        <span class="app-status status-live">📱 Live on Play Store</span>
                         <h3>Hydrogen Line Clock</h3>
-                        <p><strong>Precision Timekeeping Based on Universal Constants</strong></p>
+                        <p><strong>Universal Timekeeping Synchronized to the Hydrogen Line</strong></p>
                         <p>
-                            Experience time like never before. The Hydrogen Line Clock uses the fundamental frequency 
-                            of hydrogen atoms to provide a unique perspective on timekeeping, connecting you to the 
-                            rhythm of the universe itself.
+                            Experience a revolutionary timekeeping system synchronized to the most stable frequency 
+                            in the universe: the hydrogen line at 1420.405 MHz. Perfect for coordinating across time zones 
+                            with a fresh perspective on time.
                         </p>
-                        <p><strong>The H₂₁ Precision Initiative:</strong></p>
+                        <p><strong>Features:</strong></p>
                         <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
-                            <li>⚛️ Based on hydrogen-line frequency</li>
-                            <li>🌌 100 Beats = 1 Earth day</li>
-                            <li>⏰ Stopwatch, timer, and alarm features</li>
-                            <li>🎨 Customizable interface</li>
-                            <li>📅 Hydrogen Era calendar (starting 1951)</li>
+                            <li>⚛️ 100 Beats per day—universal time for everyone</li>
+                            <li>🌌 Based on the fundamental frequency of hydrogen atoms</li>
+                            <li>📱 Customizable home screen widget</li>
+                            <li>🎨 Clean, minimal design with color customization</li>
+                            <li>🚀 Galactic Standard Time for a spacefaring civilization</li>
                         </ul>
-                        <a href="#" class="play-store-btn disabled">
-                            Available Soon
+                        <a href="https://play.google.com/store/apps/details?id=com.hydrogenline.clock" class="play-store-btn" target="_blank">
+                            Download on Play Store
                         </a>
                     </div>
                 </div>
@@ -399,12 +476,25 @@
                 <a href="https://github.com/i-zypher" target="_blank">GitHub</a>
             </div>
 
+            <div class="social-links">
+                <a href="https://x.com/CeymerStudios" target="_blank" aria-label="Twitter/X">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/17WXnJmbTW/" target="_blank" aria-label="Facebook">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </a>
+            </div>
+
             <div class="contact">
-                <p><strong>Contact:</strong> <a href="mailto:adinapporiginal@gmail.com">adinapporiginal@gmail.com</a></p>
+                <p><strong>Contact:</strong> <a href="mailto:contact@ceymer-studios.com">contact@ceymer-studios.com</a></p>
             </div>
 
             <p style="margin-top: 2rem; color: var(--adin-green-light);">
-                © 2026 Corey Miller / Ceymer Studios. All rights reserved.
+                &copy; 2025 Ceymer Studios LLC. All rights reserved.
             </p>
         </div>
     </footer>
