@@ -1,0 +1,7 @@
+# robots.txt for ceymer-studios.com
+# https://www.robotstxt.org/
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ceymer-studios.com/sitemap.xml

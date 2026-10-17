@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Leader — case study · Ceymer Studios</title>
+<meta name="description" content="A civic-engagement app that shows you who actually represents you — with AI answers grounded in live search, engineered to keep API costs near zero." />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+<link rel="stylesheet" href="/assets/ceymer.css?v=8" />
+</head>
+<body data-adin-page="your-leader-case">
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/"><img src="/ceymer-logo.png" alt="" class="brand-logo" style="height:24px;width:auto" onerror="this.style.display='none'" />Ceymer Studios</a>
+    <nav class="site-nav">
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="mailto:corey@ceymer-studios.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="band tint-blush">
+  <div class="wrap">
+    <div class="eyebrow">Product case study · The civic one</div>
+    <h1 class="display">Democracy works better when you know <mark>who to call.</mark></h1>
+    <p class="lede" style="margin-top:1.4rem">
+      Your Leader answers a question most people can't: who actually represents me? From federal
+      down to local, it puts your representatives, their roles, and how to reach them in one
+      place — with an AI layer for the questions a directory can't answer.
+    </p>
+    <div class="case-meta">
+      <div><span>Role</span>Sole designer &amp; developer</div>
+      <div><span>Stack</span>React · TypeScript · Capacitor</div>
+      <div><span>AI</span>Gemini with search grounding</div>
+      <div><span>Status</span>Case study</div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="band" data-adin="Pop quiz: can you name your state representative? Exactly. That's why this app exists.">
+  <div class="wrap reading">
+    <div class="eyebrow">01 / The problem</div>
+    <h2 class="h">Representation is public information that's practically private.</h2>
+    <p class="body">
+      Ask most people who their U.S. representative is and you'll get a guess. Ask about their state
+      senator or county officials and you'll get a shrug. The information is public — scattered across
+      government sites with wildly different quality — but the <em>experience</em> of finding it is
+      bad enough that most people never do.
+    </p>
+    <p class="body">
+      <strong>Your Leader collapses that distance:</strong> enter where you live, see everyone who
+      represents you, at every level, with what they do and how to contact them.
+    </p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="band tint-adin">
+  <div class="wrap">
+    <div class="reading">
+      <div class="eyebrow">02 / Engineering decisions</div>
+      <h2 class="h">The interesting problem was the cost curve.</h2>
+      <p class="body">
+        A civic app has a brutal economic shape: useful to everyone, monetizable to almost no one.
+        Every design decision had to respect that — which produced the app's defining engineering
+        choice.
+      </p>
+      <div class="shiplog">
+        <div class="log-entry"><div class="log-head"><span class="log-tag">Cost</span><h4>Hardcode what doesn't change</h4></div>
+          <p>Federal representatives are a small, slowly changing dataset. Instead of paying an API
+          on every lookup, federal data ships <em>inside the app</em> — instant, offline-capable, and
+          free at any scale. API spend is reserved for what genuinely varies.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">AI</span><h4>Grounded answers, not confident guesses</h4></div>
+          <p>Civic questions punish hallucination — a wrong "who represents me" is worse than no
+          answer. The AI layer uses <strong>Gemini with Google Search grounding</strong>, so responses
+          cite what's current instead of what the model half-remembers.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">UX</span><h4>Neutral by design</h4></div>
+          <p>No editorializing, no scoring, no partisanship in the interface — the app's job is to
+          make the civic map legible, and trust depends on it staying a map.</p></div>
+      </div>
+    </div>
+    <figure class="reveal" style="max-width:52rem">
+      <div class="frame"><img src="/your-leader-screen.jpg" alt="Your Leader showing a user's elected representatives at every level" loading="lazy" /></div>
+      <figcaption><strong>Your people, one list.</strong> Every level of representation with roles and contact details — and grounded AI answers for everything a directory can't cover.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="band" data-adin="This one taught Corey that the cheapest API call is the one you never make.">
+  <div class="wrap reading">
+    <div class="eyebrow">03 / What it proved</div>
+    <h2 class="h">Constraint is a design material.</h2>
+    <p class="body">
+      Your Leader is in the portfolio because of what it demonstrates: that <strong>economic
+      constraints can drive architecture</strong> the same way user needs drive interfaces. The
+      hardcoded-federal-data decision, the grounding requirement, the neutral presentation — each is
+      a response to a hard limit, and the product is better for all three.
+    </p>
+    <p class="body">
+      It also completed a UX case study of its own — one of the self-contained portfolio pieces built
+      for my design job applications, alongside ADIN.
+    </p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span><a href="/apps/ceymer-trading/">Next case study · Ceymer Trading →</a></span>
+    <span>© 2026 Ceymer Studios LLC</span>
+  </div>
+</footer>
+
+<script src="/assets/adin.js?v=8" defer></script>
+</body>
+</html>

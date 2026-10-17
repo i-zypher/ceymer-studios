@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ceymer Trading — case study · Ceymer Studios</title>
+<meta name="description" content="An algorithmic trading terminal with an AI decision layer — a personal engineering lab in event-driven architecture, market APIs, and machine reasoning." />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+<link rel="stylesheet" href="/assets/ceymer.css?v=8" />
+</head>
+<body data-adin-page="ceymer-trading-case">
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/"><img src="/ceymer-logo.png" alt="" class="brand-logo" style="height:24px;width:auto" onerror="this.style.display='none'" />Ceymer Studios</a>
+    <nav class="site-nav">
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="mailto:corey@ceymer-studios.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="band" style="background: var(--marigold-tint)">
+  <div class="wrap">
+    <div class="eyebrow">Engineering case study · The personal lab</div>
+    <h1 class="display">A trading terminal where the AI has to <mark>show its work.</mark></h1>
+    <p class="lede" style="margin-top:1.4rem">
+      Ceymer Trading is an algorithmic trading terminal I built as a personal engineering lab —
+      event-driven architecture, real market APIs, and a language model in the decision loop that
+      must write out its reasoning before any order goes anywhere. It's not a product and it's
+      definitely not financial advice; it's where I stress-test ideas about automation and AI judgment
+      with real stakes.
+    </p>
+    <div class="case-meta">
+      <div><span>Role</span>Sole designer &amp; developer</div>
+      <div><span>Stack</span>Firebase · Cloud Functions · Alpaca API</div>
+      <div><span>AI layer</span>Claude Haiku</div>
+      <div><span>Status</span>Private · running</div>
+    </div>
+    <figure class="hero-figure reveal">
+      <div class="frame"><img src="/ceymer-trading-screen.jpg" alt="The Ceymer Trading terminal — positions, signals, and the AI's written rationale" /></div>
+    </figure>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="band" data-adin="This one trades while Corey sleeps. Responsibly. With guardrails. Mostly while he sleeps.">
+  <div class="wrap reading">
+    <div class="eyebrow">01 / Why build this</div>
+    <h2 class="h">The most honest test environment there is.</h2>
+    <p class="body">
+      Side projects usually fail politely — a bug means a broken screen. A trading system fails with
+      consequences, which makes it the most honest place to practice <strong>event-driven design,
+      idempotency, and safe automation.</strong> Every sloppy assumption costs something, so nothing
+      stays sloppy for long.
+    </p>
+    <p class="body">
+      It's also a live question I wanted to answer for myself: what does it take to put an AI model
+      in a decision loop <em>responsibly</em> — with constraints, audit trails, and a kill switch —
+      rather than just letting it improvise?
+    </p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="band tint-adin">
+  <div class="wrap reading">
+    <div class="eyebrow">02 / Architecture</div>
+    <h2 class="h">Event-driven, auditable, and deliberately paranoid.</h2>
+    <div class="shiplog">
+      <div class="log-entry"><div class="log-head"><span class="log-tag">Infra</span><h4>Cloud Functions as the engine</h4></div>
+        <p>Market events flow through Firebase Cloud Functions — scheduled scans, signal evaluation,
+        and order management as small, independent, retry-safe functions instead of one fragile
+        always-on process.</p></div>
+      <div class="log-entry"><div class="log-head"><span class="log-tag">Infra</span><h4>Alpaca for market access</h4></div>
+        <p>Market data and order execution run through the Alpaca API, with <strong>multiple isolated
+        accounts</strong> so strategies can be tested in parallel — and paper accounts absorb the
+        experiments before anything touches real money.</p></div>
+      <div class="log-entry"><div class="log-head"><span class="log-tag">AI</span><h4>Claude Haiku as the analyst — not the trigger</h4></div>
+        <p>The AI layer evaluates signals and market context and must produce a <strong>written
+        rationale</strong> for every recommendation. Hard-coded rules — position limits, risk caps,
+        market-hours checks — sit between the model and the order endpoint. The AI advises; the
+        guardrails decide what's allowed.</p></div>
+      <div class="log-entry"><div class="log-head"><span class="log-tag">UX</span><h4>A terminal, not a dashboard</h4></div>
+        <p>The interface is built like a trading terminal: dense, glanceable state — positions,
+        signals, the AI's latest reasoning, and a very prominent stop-everything control.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="band" data-adin="The real lesson: never let the excited robot near the order button without a checklist.">
+  <div class="wrap reading">
+    <div class="eyebrow">03 / What it proved</div>
+    <h2 class="h">AI in the loop is a design problem, not a model problem.</h2>
+    <p class="body">
+      The interesting engineering wasn't getting a model to have opinions about markets — models have
+      opinions about everything. It was <strong>containing</strong> those opinions: forcing written
+      rationale, bounding every action with deterministic rules, logging every decision for review,
+      and making the off switch the most reliable component in the system.
+    </p>
+    <p class="body">
+      That pattern — AI proposes, constraints dispose, everything auditable — is the same one I now
+      apply anywhere an AI feature ships in my apps, from ADIN's tutorials to Scapeboard's plant
+      identification. This lab is where it was earned.
+    </p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span><a href="/apps/hum-city/">Next · Enter Hum City →</a></span>
+    <span>© 2026 Ceymer Studios LLC</span>
+  </div>
+</footer>
+
+<script src="/assets/adin.js?v=8" defer></script>
+</body>
+</html>

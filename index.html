@@ -1,502 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ceymer Studios - Innovative Android Apps | AI-Powered Technology for Everyone</title>
-    <meta name="description" content="Ceymer Studios creates innovative Android apps including ADIN (AI tutorial assistant), Your Leader (civic engagement tool), and Hydrogen Line Clock (universal timekeeping). Making technology accessible to everyone.">
-    <meta name="keywords" content="Android apps, AI tutorial, civic engagement, elected representatives, hydrogen line clock, universal time, ADIN, Your Leader, technology education, Ceymer Studios">
-    <meta name="author" content="Ceymer Studios LLC">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://ceymer-studios.com/" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ceymer-studios.com/">
-    <meta property="og:title" content="Ceymer Studios - Helping the Past Understand the Future">
-    <meta property="og:description" content="Innovative Android apps that bridge technology gaps. Download ADIN, Your Leader, and Hydrogen Line Clock on Google Play.">
-    <meta property="og:image" content="https://ceymer-studios.com/ceymer-logo.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://ceymer-studios.com/">
-    <meta property="twitter:title" content="Ceymer Studios - Helping the Past Understand the Future">
-    <meta property="twitter:description" content="Innovative Android apps that bridge technology gaps. Download ADIN, Your Leader, and Hydrogen Line Clock on Google Play.">
-    <meta property="twitter:image" content="https://ceymer-studios.com/ceymer-logo.png">
-    <meta name="twitter:site" content="@CeymerStudios">
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Ceymer Studios LLC",
-      "url": "https://ceymer-studios.com",
-      "logo": "https://ceymer-studios.com/ceymer-logo.png",
-      "description": "Innovative Android app development studio creating AI-powered applications for education, civic engagement, and universal timekeeping.",
-      "founder": {
-        "@type": "Person",
-        "name": "Corey Miller"
-      },
-      "sameAs": [
-        "https://x.com/CeymerStudios",
-        "https://www.facebook.com/share/17WXnJmbTW/",
-        "https://github.com/i-zypher"
-      ],
-      "email": "contact@ceymer-studios.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressRegion": "PA",
-        "addressCountry": "US"
-      }
-    }
-    </script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --adin-green: #9dc183;
-            --adin-green-light: #c4daa8;
-            --adin-green-dark: #7aa05f;
-            --text-dark: #2c3e50;
-            --text-light: #7f8c8d;
-            --bg-light: #f8f9fa;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo-image {
-            height: 50px;
-            width: auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--adin-green-dark);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--adin-green);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            color: var(--adin-green-dark);
-            font-style: italic;
-            margin-bottom: 2rem;
-        }
-
-        .robot-container {
-            max-width: 400px;
-            margin: 2rem auto;
-        }
-
-        .robot-container img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Apps Section */
-        .apps {
-            padding: 4rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text-dark);
-        }
-
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .app-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .app-card h3 {
-            color: var(--adin-green-dark);
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-
-        .app-card p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .app-status {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .status-live {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .play-store-btn {
-            display: inline-block;
-            background: var(--adin-green);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: background 0.3s;
-            font-weight: 600;
-        }
-
-        .play-store-btn:hover {
-            background: var(--adin-green-dark);
-        }
-
-        /* About Section */
-        .about {
-            background: white;
-            padding: 4rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--adin-green-light);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .social-links a {
-            color: var(--adin-green-light);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: white;
-        }
-
-        .contact {
-            margin: 2rem 0;
-        }
-
-        .contact a {
-            color: var(--adin-green-light);
-            text-decoration: none;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .tagline {
-                font-size: 1.2rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .app-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .logo-image {
-                height: 40px;
-            }
-
-            .robot-container {
-                max-width: 300px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ceymer Studios — apps that make technology kinder</title>
+<meta name="description" content="Ceymer Studios is a one-person app studio in Jefferson Hills, Pennsylvania. ADIN, Scapeboard, Your Leader, Hum City — designed, built, and shipped by Corey Miller." />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+<link rel="stylesheet" href="/assets/ceymer.css?v=8" />
 </head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="logo-container">
-                <img src="ceymer-logo.png" alt="Ceymer Studios Logo" class="logo-image">
-                <div class="logo">Ceymer Studios</div>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#apps">Apps</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="https://sites.google.com/view/adinprivacy/home" target="_blank">Privacy</a></li>
-            </ul>
-        </nav>
-    </header>
+<body data-adin-page="home">
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Ceymer Studios</h1>
-                <p class="tagline">Helping the Past Understand the Future</p>
-                
-                <div class="robot-container">
-                    <img src="adin-robot.png" alt="ADIN - Your AI Tutorial Assistant">
-                </div>
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/"><img src="/ceymer-logo.png" alt="" class="brand-logo" style="height:24px;width:auto" onerror="this.style.display='none'" />Ceymer Studios</a>
+    <nav class="site-nav">
+      <a href="#work">Work</a>
+      <a href="#how">How I work</a>
+      <a href="#about">About</a>
+      <a href="mailto:corey@ceymer-studios.com">Contact</a>
+    </nav>
+  </div>
+</header>
 
-                <p style="font-size: 1.1rem; color: var(--text-light); max-width: 600px; margin: 2rem auto;">
-                    We create innovative applications that bridge the gap between complex technology and everyday users,
-                    making the digital world accessible to everyone.
-                </p>
-            </div>
-        </section>
+<!-- ============ HERO ============ -->
+<section class="band">
+  <div class="wrap">
+    <div class="eyebrow">One-person app studio · Jefferson Hills, PA</div>
+    <h1 class="display">Apps that make technology <mark>kinder.</mark></h1>
+    <p class="lede" style="margin-top:1.4rem">
+      I'm Corey Miller. I design, build, and ship cross-platform apps — from a tech tutor
+      that older adults actually trust, to business tools for landscapers, to a cyberpunk
+      audio-drama universe. Every screen here was researched, tested, and shipped by one person.
+    </p>
+    <div class="sticker-row" style="margin-top:1.8rem">
+      <span class="sticker">2 apps live on App Store + Google Play</span>
+      <span class="sticker">Google UX Design Certificate</span>
+      <span class="sticker">Firebase · Capacitor · Cloud Run</span>
+    </div>
+    <div style="margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap">
+      <a class="btn primary" href="#work">See the work →</a>
+      <a class="btn" href="mailto:corey@ceymer-studios.com">Get in touch</a>
+    </div>
+  </div>
+</section>
 
-        <section id="apps" class="apps">
-            <div class="container">
-                <h2 class="section-title">Our Apps</h2>
-                <div class="app-grid">
-                    <!-- ADIN -->
-                    <div class="app-card">
-                        <span class="app-status status-live">📱 Live on Play Store</span>
-                        <h3>ADIN</h3>
-                        <p><strong>Advanced Digital Instructional Navigator</strong></p>
-                        <p>
-                            Your AI-powered assistant for learning Android devices. ADIN provides step-by-step tutorials 
-                            in 7 languages, making technology accessible to beginners and advanced users alike.
-                        </p>
-                        <p><strong>Features:</strong></p>
-                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
-                            <li>✨ AI-powered interactive tutorials</li>
-                            <li>🌍 Support for 7 languages</li>
-                            <li>🎨 Customizable appearance</li>
-                            <li>📚 Progress tracking</li>
-                            <li>🎯 Personalized learning experience</li>
-                        </ul>
-                        <a href="https://play.google.com/store/apps/details?id=com.zypher.adin" class="play-store-btn" target="_blank">
-                            Download on Play Store
-                        </a>
-                    </div>
+<!-- ============ WORK ============ -->
+<section class="band" id="work" data-adin="These are the apps! I'm the green one. Click a card for the full story.">
+  <div class="wrap">
+    <div class="eyebrow">The work</div>
+    <h2 class="h">Four projects, four very different problems.</h2>
+    <div class="work-grid" style="margin-top:2.2rem">
 
-                    <!-- Your Leader -->
-                    <div class="app-card">
-                        <span class="app-status status-live">📱 Live on Play Store</span>
-                        <h3>Your Leader</h3>
-                        <p><strong>Instantly Discover Your Elected Officials</strong></p>
-                        <p>
-                            Powered by Google Gemini AI, Your Leader makes civic engagement simple. Enter your address 
-                            and instantly discover every elected official who represents you—from local city council 
-                            to the President of the United States.
-                        </p>
-                        <p><strong>Features:</strong></p>
-                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
-                            <li>🏛️ Find all your representatives at every level</li>
-                            <li>🤖 AI-powered with real-time search verification</li>
-                            <li>📞 Direct contact information and official websites</li>
-                            <li>🆓 Completely free to use</li>
-                            <li>🇺🇸 Know who represents you—it's the foundation of democracy</li>
-                        </ul>
-                        <a href="https://play.google.com/store/apps/details?id=net.yourleader.app" class="play-store-btn" target="_blank">
-                            Download on Play Store
-                        </a>
-                    </div>
-
-                    <!-- Hydrogen Line Clock -->
-                    <div class="app-card">
-                        <span class="app-status status-live">📱 Live on Play Store</span>
-                        <h3>Hydrogen Line Clock</h3>
-                        <p><strong>Universal Timekeeping Synchronized to the Hydrogen Line</strong></p>
-                        <p>
-                            Experience a revolutionary timekeeping system synchronized to the most stable frequency 
-                            in the universe: the hydrogen line at 1420.405 MHz. Perfect for coordinating across time zones 
-                            with a fresh perspective on time.
-                        </p>
-                        <p><strong>Features:</strong></p>
-                        <ul style="color: var(--text-light); margin-bottom: 1.5rem; margin-left: 1.5rem;">
-                            <li>⚛️ 100 Beats per day—universal time for everyone</li>
-                            <li>🌌 Based on the fundamental frequency of hydrogen atoms</li>
-                            <li>📱 Customizable home screen widget</li>
-                            <li>🎨 Clean, minimal design with color customization</li>
-                            <li>🚀 Galactic Standard Time for a spacefaring civilization</li>
-                        </ul>
-                        <a href="https://play.google.com/store/apps/details?id=com.hydrogenline.clock" class="play-store-btn" target="_blank">
-                            Download on Play Store
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="container">
-                <div class="about-content">
-                    <h2 class="section-title">About Ceymer Studios</h2>
-                    <p>
-                        At Ceymer Studios, we believe that technology should be accessible to everyone, 
-                        regardless of their technical background or age. Our mission is to create 
-                        applications that bridge the gap between complex innovations and everyday users.
-                    </p>
-                    <p>
-                        Founded by Corey Miller, Ceymer Studios focuses on developing thoughtful, 
-                        user-centered applications that make learning technology intuitive and enjoyable. 
-                        We combine artificial intelligence, clean design, and educational principles 
-                        to help people embrace the digital future.
-                    </p>
-                    <p>
-                        <em>"Helping the Past Understand the Future"</em> isn't just our tagline—it's 
-                        our commitment to making tomorrow's technology accessible today.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-links">
-                <a href="#apps">Apps</a>
-                <a href="#about">About</a>
-                <a href="https://sites.google.com/view/adinprivacy/home" target="_blank">Privacy Policy</a>
-                <a href="https://github.com/i-zypher" target="_blank">GitHub</a>
-            </div>
-
-            <div class="social-links">
-                <a href="https://x.com/CeymerStudios" target="_blank" aria-label="Twitter/X">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-                <a href="https://www.facebook.com/share/17WXnJmbTW/" target="_blank" aria-label="Facebook">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="contact">
-                <p><strong>Contact:</strong> <a href="mailto:contact@ceymer-studios.com">contact@ceymer-studios.com</a></p>
-            </div>
-
-            <p style="margin-top: 2rem; color: var(--adin-green-light);">
-                &copy; 2025 Ceymer Studios LLC. All rights reserved.
-            </p>
+      <a class="card work-card reveal" href="/apps/adin/">
+        <div class="art contain"><img src="/adin-robot.png" alt="ADIN, the friendly green helper character" loading="lazy" /></div>
+        <div class="meta">
+          <h3>ADIN <span class="chip live">Live · iOS + Android</span></h3>
+          <p>A tech-literacy tutor for older adults, built around a safe practice phone where
+          nothing can break. Capstone of my Google UX Design Certificate — 41 tutorials, 7 languages.</p>
+          <span class="go">Read the case study →</span>
         </div>
-    </footer>
+      </a>
+
+      <a class="card work-card reveal" href="/apps/scapeboard/">
+        <div class="art"><img src="/scapeboard-hero.jpg" alt="Scapeboard app interface" loading="lazy" /></div>
+        <div class="meta">
+          <h3>Scapeboard <span class="chip live">Live · iOS + Android</span></h3>
+          <p>Estimates, invoices, and client management for landscaping businesses — plus AI plant
+          identification. Survived six App Store rejections and one very stubborn black screen.</p>
+          <span class="go">Read the case study →</span>
+        </div>
+      </a>
+
+      <a class="card work-card reveal" href="/apps/your-leader/">
+        <div class="art"><img src="/your-leader-screen.jpg" alt="Your Leader app showing elected representatives" loading="lazy" /></div>
+        <div class="meta">
+          <h3>Your Leader <span class="chip">Case study</span></h3>
+          <p>A civic-engagement app that shows you exactly who represents you — federal to local —
+          with AI answers grounded in live search, engineered to keep API costs near zero.</p>
+          <span class="go">Read the case study →</span>
+        </div>
+      </a>
+
+      <a class="card work-card reveal" href="/apps/ceymer-trading/">
+        <div class="art"><img src="/ceymer-trading-screen.jpg" alt="Ceymer Trading terminal interface" loading="lazy" /></div>
+        <div class="meta">
+          <h3>Ceymer Trading <span class="chip">Personal lab</span></h3>
+          <p>An algorithmic trading terminal with an AI decision layer — event-driven Cloud Functions,
+          live market execution, and a language model that has to show its reasoning before it trades.</p>
+          <span class="go">Read the case study →</span>
+        </div>
+      </a>
+
+      <a class="card work-card hum reveal" href="/apps/hum-city/">
+        <div class="art"><img src="/hum-city-mel.jpg" alt="Hum City character art" loading="lazy" /><span class="neon">HUM CITY</span></div>
+        <div class="meta">
+          <h3>Hum City <span class="chip dark">Audio drama</span></h3>
+          <p>A serialized cyberpunk universe I co-create with writing partner John Vogel — stories,
+          synthetic voices, and a language model trained from scratch on our own corpus.</p>
+          <span class="go">Enter the city →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section class="band tint-adin" id="how" data-adin="This loop is why my welcome screen exists. Testing found the problem; iteration fixed it.">
+  <div class="wrap">
+    <div class="eyebrow">How I work</div>
+    <h2 class="h">One loop, every project.</h2>
+    <p class="body">
+      I came to design through code — a self-taught developer who realized his interfaces weren't
+      as good as his backend. The Google UX Design Certificate gave me the framework; shipping real
+      apps to real users made it a habit. Every screen in every project goes through the same loop:
+    </p>
+    <div class="loop reveal" aria-label="Process: research, design, test, iterate, repeat">
+      <span class="node">Research</span><span class="arrow">→</span>
+      <span class="node">Design</span><span class="arrow">→</span>
+      <span class="node">Test</span><span class="arrow">→</span>
+      <span class="node">Iterate</span><span class="arrow">↺</span>
+    </div>
+    <p class="body">
+      Under the hood: <strong>React + TypeScript</strong> frontends, <strong>Capacitor</strong> for
+      native iOS and Android, <strong>Firebase</strong> for auth and data, <strong>Cloud Run</strong>
+      backends that keep API keys off the client, and app review battle scars documented in every
+      case study — because knowing how something ships is part of the craft.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="band" id="about" data-adin="That's my maker. Be nice to him — he taught me everything I know.">
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2 class="h">Self-taught, seriously shipped.</h2>
+    <div class="about-grid"><div>
+    <p class="body">
+      Ceymer Studios LLC is a registered Pennsylvania company — and it's one person. I started
+      building on a tablet with AI-assisted tools and worked up to real architectural decisions
+      across Firebase, Cloud Run, and native platform tooling on both app stores. I hold the
+      <strong>Google UX Design Professional Certificate</strong> and I'm working through the
+      <strong>IBM iOS &amp; Android Mobile App Developer Certificate</strong>.
+    </p>
+    <p class="body">
+      When I'm not shipping, I'm writing and producing <a href="/apps/hum-city/">Hum City</a> with
+      John Vogel, or listening to more folk and bluegrass than is probably reasonable.
+    </p>
+    <div style="margin-top:1.8rem">
+      <a class="btn primary" href="mailto:corey@ceymer-studios.com">corey@ceymer-studios.com</a>
+    </div>
+    </div>
+    <div class="portrait reveal"><img src="/corey-portrait.jpg" alt="Corey Miller" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© 2026 Ceymer Studios LLC · Registered in Pennsylvania</span>
+    <span>Built & maintained by Corey Miller — with help from ADIN</span>
+  </div>
+</footer>
+
+<script src="/assets/adin.js?v=8" defer></script>
 </body>
 </html>

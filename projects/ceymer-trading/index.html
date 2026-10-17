@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ceymer Trading — Ceymer Studios</title>
+<meta name="description" content="An AI-powered autonomous trading terminal — Alpaca API, Claude Haiku brain, six trading modes, runs on a 10-minute scheduler during market hours." />
+<link rel="canonical" href="https://ceymer-studios.com/projects/ceymer-trading" />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+
+<meta property="og:title" content="Ceymer Trading — AI-powered autonomous trading terminal." />
+<meta property="og:description" content="A serious internal project from Ceymer Studios. Six modes, Claude Haiku brain, Alpaca API." />
+<meta property="og:image" content="https://ceymer-studios.com/ceymer-logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@300;400;500;700&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #060908;
+    --bg-elevated: #0c1410;
+    --bg-line: #142018;
+    --ink: #ececec;
+    --ink-dim: #9aa8a0;
+    --ink-faint: #5a6a60;
+    /* Trading palette — terminal green */
+    --page-1: #84cc16;
+    --page-2: #facc15;
+    --page-glow: rgba(132, 204, 22, 0.15);
+    --red: #f87171;
+
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Inter Tight', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --max: 1100px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  /* Subtle scanline / grid overlay for terminal vibe */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    z-index: 100; opacity: 0.025;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/></svg>");
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    z-index: 99; opacity: 0.4;
+    background-image:
+      linear-gradient(to right, rgba(132, 204, 22, 0.015) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(132, 204, 22, 0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  ::selection { background: var(--page-1); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); position: relative; z-index: 2; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(6, 9, 8, 0.8);
+    border-bottom: 1px solid var(--bg-line);
+  }
+  nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem; padding-bottom: 1rem; max-width: 1280px;
+  }
+  .brand {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.1rem;
+    letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.65rem;
+  }
+  .brand:hover { opacity: 0.75; }
+  .brand-logo { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; }
+  .nav-links {
+    display: flex; gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim);
+  }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  .back-bar { padding-top: 7rem; padding-bottom: 1rem; }
+  .back-link {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-faint); display: inline-flex; align-items: center;
+    gap: 0.6rem; transition: color 0.2s, gap 0.3s;
+  }
+  .back-link:hover { color: var(--page-1); gap: 0.9rem; }
+
+  /* ---------- Terminal hero ---------- */
+  .hero {
+    padding: 3rem 0 5rem; position: relative; overflow: hidden;
+  }
+  .terminal-line {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    color: var(--page-1); margin-bottom: 0.4rem;
+    opacity: 0.9; display: flex; align-items: center; gap: 0.6rem;
+  }
+  .terminal-line .prompt { color: var(--ink-faint); }
+  .terminal-line .blink {
+    display: inline-block; width: 8px; height: 14px;
+    background: var(--page-1); animation: blink 1s steps(2) infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  h1.title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(2.4rem, 6.5vw, 4.8rem);
+    line-height: 1.05; letter-spacing: -0.03em;
+    margin: 2rem 0 2rem; max-width: 16ch;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  h1.title em {
+    font-style: italic; color: var(--page-1);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .lede {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.5; color: var(--ink-dim);
+    max-width: 60ch; margin-bottom: 2.5rem;
+  }
+
+  /* Live status bar — looks like a real dashboard ticker */
+  .status-bar {
+    border: 1px solid var(--bg-line);
+    background: var(--bg-elevated);
+    padding: 1rem 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.78rem;
+    margin-top: 2rem;
+  }
+  .status-item {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .status-item .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--page-1);
+    box-shadow: 0 0 8px var(--page-1);
+  }
+  .status-item .dot.amber { background: var(--page-2); box-shadow: 0 0 8px var(--page-2); }
+  .status-item .label { color: var(--ink-faint); }
+  .status-item .value { color: var(--ink); }
+
+  /* ---------- Meta strip ---------- */
+  .meta-strip {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--bg-line);
+    border-bottom: 1px solid var(--bg-line);
+    margin: 5rem 0;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .meta-grid > div span {
+    display: block; color: var(--ink-faint);
+    font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+
+
+  /* ---------- Screenshot showcase ---------- */
+  .screenshot-showcase {
+    padding: 1rem 0 5rem;
+    text-align: center;
+  }
+  .wrap-narrow {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .phone-large {
+    aspect-ratio: 9/19;
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 28px;
+    padding: 8px;
+    background: rgba(0,0,0,0.4);
+    box-shadow:
+      0 30px 60px -15px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 0 60px var(--page-glow);
+    position: relative;
+  }
+  .phone-large::before {
+    content: ''; position: absolute;
+    top: 12px; left: 50%; transform: translateX(-50%);
+    width: 48px; height: 5px;
+    background: rgba(255,255,255,0.15); border-radius: 3px;
+    z-index: 3;
+  }
+  .phone-large img {
+    width: 100%; height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+  }
+  .caption {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    color: var(--ink-faint); letter-spacing: 0.02em;
+    max-width: 50ch; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ---------- Sections ---------- */
+  section.body-section { padding: 4rem 0; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--ink-faint); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-label::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--page-1); border-radius: 50%;
+  }
+  h2.section-h {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem; max-width: 28ch;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  h2.section-h em { font-style: italic; color: var(--page-1); }
+  .prose p {
+    font-size: 1.05rem; color: var(--ink-dim);
+    margin-bottom: 1.2rem; max-width: 62ch;
+  }
+  .prose p strong { color: var(--ink); font-weight: 500; }
+  .prose code {
+    font-family: var(--font-mono); font-size: 0.88em;
+    padding: 0.15rem 0.4rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--bg-line);
+    border-radius: 3px;
+    color: var(--page-1);
+  }
+
+  /* ---------- Mode cards ---------- */
+  .modes {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1rem; margin-top: 1.5rem;
+  }
+  @media (min-width: 700px) { .modes { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1000px) { .modes { grid-template-columns: repeat(3, 1fr); } }
+  .mode {
+    padding: 1.4rem;
+    border: 1px solid var(--bg-line);
+    background: var(--bg-elevated);
+    font-family: var(--font-mono); font-size: 0.85rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .mode:hover { border-color: var(--page-1); }
+  .mode-num {
+    position: absolute; top: 1rem; right: 1.2rem;
+    color: var(--ink-faint); font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .mode-name {
+    color: var(--page-1); font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    font-size: 0.85rem; margin-bottom: 0.6rem;
+  }
+  .mode-desc { color: var(--ink-dim); font-size: 0.82rem; line-height: 1.5; }
+
+  /* ---------- Code block (faux terminal output) ---------- */
+  .code-block {
+    margin: 2rem 0;
+    border: 1px solid var(--bg-line);
+    background: #050807;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    overflow: hidden;
+  }
+  .code-block-header {
+    padding: 0.7rem 1.2rem;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--bg-line);
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.7rem;
+    display: flex; justify-content: space-between;
+  }
+  .code-block pre {
+    padding: 1.2rem 1.5rem;
+    color: var(--ink-dim);
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .code-block .k { color: #c084fc; }
+  .code-block .s { color: var(--page-1); }
+  .code-block .c { color: var(--ink-faint); font-style: italic; }
+  .code-block .v { color: var(--page-2); }
+
+  /* ---------- War stories ---------- */
+  .war-story {
+    border-left: 2px solid var(--page-1);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, var(--page-glow) 0%, transparent 50%);
+  }
+  .war-story-tag {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--page-1); text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.6rem;
+  }
+  .war-story h4 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 1.3rem; line-height: 1.2;
+    margin-bottom: 0.8rem; letter-spacing: -0.01em;
+  }
+  .war-story p {
+    font-size: 0.98rem; color: var(--ink-dim);
+    margin-bottom: 0.8rem; max-width: 64ch;
+  }
+  .war-story p:last-child { margin-bottom: 0; }
+
+  /* ---------- Stack ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem; margin-top: 1.5rem;
+    font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .stack-grid > div {
+    padding: 1.2rem;
+    border: 1px solid var(--bg-line);
+    background: var(--bg-elevated);
+  }
+  .stack-grid > div span {
+    display: block; color: var(--ink-faint);
+    font-size: 0.65rem; text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Internal notice ---------- */
+  .internal-notice {
+    margin: 3rem 0;
+    padding: 1.5rem 2rem;
+    border: 1px dashed var(--page-2);
+    background: rgba(250, 204, 21, 0.04);
+    font-family: var(--font-mono); font-size: 0.85rem;
+    color: var(--ink-dim);
+  }
+  .internal-notice strong { color: var(--page-2); }
+
+  /* ---------- CTA ---------- */
+  .cta-strip {
+    margin-top: 5rem; padding: 4rem 0;
+    border-top: 1px solid var(--bg-line);
+    text-align: center;
+  }
+  .cta-strip h3 {
+    font-family: var(--font-display); font-weight: 300;
+    font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15; margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .cta-btn {
+    font-family: var(--font-mono); font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 1rem 1.8rem;
+    border: 1px solid var(--ink); color: var(--ink);
+    transition: all 0.25s;
+  }
+  .cta-btn.primary { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn:hover { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn.primary:hover { background: transparent; color: var(--page-1); }
+
+  footer {
+    border-top: 1px solid var(--bg-line); padding: 2.5rem 0;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint);
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; max-width: 1280px; }
+  footer a:hover { color: var(--page-1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">
+      <img src="/ceymer-logo.png" alt="Ceymer Studios logo" class="brand-logo" />
+      Ceymer Studios
+    </a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#education">Education</a>
+      <a href="/#apps">Apps</a>
+      <a href="/#creative">Creative</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap back-bar">
+  <a href="/#apps" class="back-link">← Back to apps</a>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="terminal-line"><span class="prompt">$</span> ceymer-trading --status<span class="blink"></span></div>
+    <div class="terminal-line" style="color: var(--ink-faint);">→ scheduler: active · interval: 10m · accounts: 3</div>
+
+    <h1 class="title">An AI brain, <em>three accounts, six modes.</em></h1>
+    <p class="lede">
+      Ceymer Trading is an internal autonomous trading terminal — a React frontend, Firebase Cloud
+      Functions backend, and a Claude Haiku-powered decision engine that runs every ten minutes
+      during market hours across paper, paper2, and live Alpaca accounts.
+    </p>
+
+    <div class="status-bar">
+      <div class="status-item"><span class="dot"></span><span class="label">Live</span><span class="value">3 accounts</span></div>
+      <div class="status-item"><span class="dot"></span><span class="label">Scheduler</span><span class="value">10m · Mkt Hours</span></div>
+      <div class="status-item"><span class="dot amber"></span><span class="label">Modes</span><span class="value">6 Active</span></div>
+      <div class="status-item"><span class="dot"></span><span class="label">Broker</span><span class="value">Alpaca API</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap meta-strip">
+  <div class="meta-grid">
+    <div><span>Status</span>Internal · Live</div>
+    <div><span>App</span>ceymer-trading.web.app</div>
+    <div><span>Engine</span>Claude Haiku</div>
+    <div><span>Broker</span>Alpaca</div>
+    <div><span>Year</span>2025–2026</div>
+  </div>
+<section class="screenshot-showcase">
+  <div class="wrap-narrow">
+    <div class="phone-large">
+      <img src="/ceymer-trading-screen.jpg" alt="App screenshot" />
+    </div>
+    <p class="caption">The live portfolio view — Alpaca terminal aesthetic, real positions, real P&L, real money.</p>
+  </div>
+</section>
+
+</div>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The thesis</div>
+    <h2 class="section-h">Can an LLM be a <em>disciplined trader?</em></h2>
+    <div class="prose">
+      <p>
+        The question driving Ceymer Trading isn't "can AI predict the market" — that's the wrong
+        question. The right question is: <strong>given good market data, well-defined modes, and
+        strict risk parameters, can an LLM make consistent, rule-following trading decisions that
+        a human discretionary trader would struggle to replicate?</strong>
+      </p>
+      <p>
+        The terminal is the experimental apparatus for that question. Three Alpaca accounts run in
+        parallel — two paper-trading environments and one live — so I can compare strategies against
+        themselves and against the market in real time.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The modes</div>
+    <h2 class="section-h">Six personalities, one brain.</h2>
+    <div class="prose">
+      <p>
+        The Claude Haiku engine operates in one of six modes at any time, each with its own risk
+        profile, sector bias, and decision framework:
+      </p>
+    </div>
+    <div class="modes">
+      <div class="mode">
+        <div class="mode-num">01</div>
+        <div class="mode-name">Conservative</div>
+        <div class="mode-desc">Capital preservation. Slow, deliberate entries. Heavy diversification.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-num">02</div>
+        <div class="mode-name">Balanced</div>
+        <div class="mode-desc">The default. Moderate risk, blended momentum and value signals.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-num">03</div>
+        <div class="mode-name">Aggressive</div>
+        <div class="mode-desc">Higher conviction, larger positions. Will lean into momentum.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-num">04</div>
+        <div class="mode-name">Momentum</div>
+        <div class="mode-desc">Pure trend-following. Rides what's moving, exits what isn't.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-num">05</div>
+        <div class="mode-name">Contrarian</div>
+        <div class="mode-desc">Buys weakness, sells strength. Tests the mean-reversion hypothesis.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-num">06</div>
+        <div class="mode-name">Pause</div>
+        <div class="mode-desc">Hold cash. No new positions. Used during high-uncertainty periods.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">Architecture</div>
+    <h2 class="section-h">How it actually runs.</h2>
+    <div class="code-block">
+      <div class="code-block-header">
+        <span>scheduler.ts · cloud function</span>
+        <span>v2 · node 24</span>
+      </div>
+      <pre><span class="c">// Triggered every 10 min during market hours</span>
+<span class="k">export const</span> tradingBrain = onSchedule({
+  schedule: <span class="s">"every 10 minutes"</span>,
+  timeZone: <span class="s">"America/New_York"</span>,
+}, <span class="k">async</span> (event) => {
+  <span class="k">if</span> (!isMarketOpen()) <span class="k">return</span>;
+
+  <span class="k">const</span> accounts = [<span class="s">"paper"</span>, <span class="s">"paper2"</span>, <span class="s">"live"</span>];
+
+  <span class="k">for</span> (<span class="k">const</span> account <span class="k">of</span> accounts) {
+    <span class="k">const</span> ctx = <span class="k">await</span> buildMarketContext(account);
+    <span class="k">const</span> decision = <span class="k">await</span> claudeHaiku.decide(ctx);
+    <span class="k">await</span> alpaca.execute(account, decision);
+    <span class="k">await</span> firestore.log(<span class="v">'ceymer-trading'</span>, decision);
+  }
+});</pre>
+    </div>
+    <div class="prose">
+      <p>
+        Three pieces: a market context builder that gathers positions, recent fills, and price action;
+        the Haiku brain that interprets context and emits a structured decision; and an Alpaca
+        executor that carries it out. All decisions log to a Firestore database with a non-default
+        ID — a small thing that nearly broke the build.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The build · Real talk</div>
+    <h2 class="section-h">Three war stories from the live build.</h2>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 01</div>
+      <h4>The Firestore non-default ID trap</h4>
+      <p>
+        The Firestore database for Ceymer Trading uses a non-default ID: <code>ceymer-trading</code>.
+        That's a perfectly valid choice — Firebase supports it — but the Firebase SDK <em>defaults
+        to the default database</em>, silently, every time, in every code path you don't explicitly
+        override.
+      </p>
+      <p>
+        The fix is two lines that absolutely must be present everywhere:
+        <code>getFirestore(app, 'ceymer-trading')</code> in the modular SDK, and the equivalent
+        explicit database ID in the Admin SDK. Forget either one and your writes go into a phantom
+        default database you'll spend a confused hour trying to find.
+      </p>
+    </div>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 02</div>
+      <h4>PDT and minimum order size on the live account</h4>
+      <p>
+        Going live with a small account immediately surfaced two regulatory realities I'd never had
+        to think about in paper trading: <strong>Pattern Day Trader rules</strong> and
+        <strong>minimum order sizes</strong>. The system was issuing decisions that paper would
+        cheerfully execute and live would reject — too small, too frequent, wrong account class.
+      </p>
+      <p>
+        Both got patched into the executor as pre-flight checks: any decision that would trigger
+        PDT or fall below minimum order size gets logged, skipped, and the brain gets re-prompted
+        with the constraint. The brain learns to size up or sit out.
+      </p>
+    </div>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 03</div>
+      <h4>Cost discipline at 10-minute intervals</h4>
+      <p>
+        Running Haiku every 10 minutes across three accounts during all 6.5 hours of US market
+        hours is roughly <strong>117 API calls per day</strong>. That's manageable, but it adds
+        up over a month, and only if every call is doing real work.
+      </p>
+      <p>
+        The context builder does aggressive caching of anything that doesn't change minute-to-minute
+        (account metadata, sector classifications, holiday calendars), so each prompt is lean and
+        cost-efficient.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The stack</div>
+    <h2 class="section-h">Built with.</h2>
+    <div class="stack-grid">
+      <div><span>Frontend</span>React</div>
+      <div><span>Backend</span>Firebase Cloud Functions v2</div>
+      <div><span>Runtime</span>Node.js 24</div>
+      <div><span>Database</span>Firestore (custom DB)</div>
+      <div><span>AI</span>Claude Haiku</div>
+      <div><span>Broker</span>Alpaca API</div>
+      <div><span>Scheduler</span>Cloud Scheduler · 10m</div>
+      <div><span>Hosting</span>Firebase Hosting</div>
+    </div>
+
+    <div class="internal-notice">
+      <strong>Internal project.</strong> Ceymer Trading is currently an internal research
+      and development tool. It is not for public use, and nothing on this page should be
+      interpreted as investment advice or a recommendation of any kind.
+    </div>
+  </div>
+</section>
+
+<div class="wrap cta-strip">
+  <h3>Want to chat about AI agents and autonomous systems?</h3>
+  <div class="cta-row">
+    <a href="/#contact" class="cta-btn primary">Get in touch →</a>
+    <a href="/#apps" class="cta-btn">See other projects</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ceymer Studios LLC · Registered in Pennsylvania</span>
+    <span><a href="/">ceymer-studios.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

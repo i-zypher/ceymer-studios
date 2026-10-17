@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hum City — Ceymer Studios</title>
+<meta name="description" content="A cyberpunk universe co-created with John Vogel. Original lore, characters, screenplay, and a serialized audio drama on YouTube at @synthandsyn." />
+<link rel="canonical" href="https://ceymer-studios.com/projects/hum-city" />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+
+<meta property="og:title" content="Hum City — A cyberpunk universe." />
+<meta property="og:description" content="Co-created with John Vogel. Original lore, characters, screenplay, and the Synth & Syn audio drama on YouTube." />
+<meta property="og:image" content="https://ceymer-studios.com/ceymer-logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@300;400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #050208;
+    --bg-elevated: #100818;
+    --bg-line: #1e1230;
+    --ink: #ececec;
+    --ink-dim: #a89ab0;
+    --ink-faint: #5a4a65;
+    /* Hum City palette — neon noir */
+    --page-1: #e85a4f;
+    --page-2: #c084fc;
+    --page-3: #7df9ff;
+    --page-glow: rgba(232, 90, 79, 0.2);
+    --page-glow-2: rgba(192, 132, 252, 0.18);
+
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Inter Tight', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --max: 1100px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); line-height: 1.7;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    z-index: 100; opacity: 0.05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/></svg>");
+    mix-blend-mode: overlay;
+  }
+  ::selection { background: var(--page-1); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); position: relative; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(5, 2, 8, 0.8);
+    border-bottom: 1px solid var(--bg-line);
+  }
+  nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem; padding-bottom: 1rem; max-width: 1280px;
+  }
+  .brand {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.1rem;
+    letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.65rem;
+  }
+  .brand:hover { opacity: 0.75; }
+  .brand-logo { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; }
+  .nav-links {
+    display: flex; gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim);
+  }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  .back-bar { padding-top: 7rem; padding-bottom: 1rem; }
+  .back-link {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-faint); display: inline-flex; align-items: center;
+    gap: 0.6rem; transition: color 0.2s, gap 0.3s;
+  }
+  .back-link:hover { color: var(--page-1); gap: 0.9rem; }
+
+  /* ---------- Cinematic hero ---------- */
+  .hero {
+    min-height: 75vh;
+    padding: 4rem 0 6rem;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+  }
+  .hero-bg-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    z-index: 0;
+    opacity: 0.55;
+    filter: saturate(1.1) contrast(1.05);
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse at 20% 30%, var(--page-glow) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 70%, var(--page-glow-2) 0%, transparent 50%),
+      linear-gradient(180deg, rgba(5,2,8,0.4) 0%, rgba(5,2,8,0.75) 70%, rgba(5,2,8,0.95) 100%);
+  }
+  /* The city grid */
+  .hero::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 40%;
+    background-image:
+      repeating-linear-gradient(90deg, transparent 0px, transparent 28px, rgba(125,249,255,0.06) 28px, rgba(125,249,255,0.06) 29px),
+      repeating-linear-gradient(0deg, transparent 0px, transparent 32px, rgba(232,90,79,0.08) 32px, rgba(232,90,79,0.08) 33px);
+    -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
+    mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
+    z-index: 2;
+  }
+  .hero .wrap { z-index: 3; }
+  .hero .horizon {
+    position: absolute;
+    bottom: 38%; left: 50%; transform: translateX(-50%);
+    width: 70%; max-width: 600px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--page-3), transparent);
+    box-shadow: 0 0 30px var(--page-3);
+    z-index: 2;
+    opacity: 0.7;
+  }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--page-3); margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--page-3);
+    box-shadow: 0 0 6px var(--page-3);
+  }
+  h1.title {
+    font-family: var(--font-display); font-weight: 300;
+    font-style: italic;
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.95; letter-spacing: -0.04em;
+    margin-bottom: 2rem;
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-shadow: 0 0 40px rgba(232,90,79,0.3);
+  }
+  h1.title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--page-1), var(--page-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 0;
+  }
+  .lede {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    line-height: 1.5; color: var(--ink-dim);
+    max-width: 56ch;
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "SOFT" 60;
+  }
+
+  /* ---------- Meta strip ---------- */
+  .meta-strip {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--bg-line);
+    border-bottom: 1px solid var(--bg-line);
+    margin: 0 0 5rem;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .meta-grid > div span {
+    display: block; color: var(--ink-faint);
+    font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+
+  /* ---------- Sections ---------- */
+  section.body-section { padding: 4rem 0; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--ink-faint); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-label::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--page-1); border-radius: 50%;
+  }
+  h2.section-h {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem; max-width: 28ch;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  h2.section-h em { font-style: italic; color: var(--page-1); }
+  .prose p {
+    font-size: 1.08rem; color: var(--ink-dim);
+    margin-bottom: 1.3rem; max-width: 62ch;
+  }
+  .prose p strong { color: var(--ink); font-weight: 500; }
+  .prose p.pullquote {
+    font-family: var(--font-display); font-style: italic;
+    font-weight: 300; font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    line-height: 1.4; color: var(--ink);
+    padding: 1rem 0 1rem 2rem;
+    border-left: 2px solid var(--page-1);
+    margin: 2.5rem 0;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+
+  /* ---------- Characters ---------- */
+  .characters {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--bg-line);
+    border: 1px solid var(--bg-line);
+    margin-top: 2rem;
+  }
+  @media (min-width: 700px) { .characters { grid-template-columns: repeat(2, 1fr); } }
+  .character {
+    background: var(--bg-elevated);
+    padding: 2rem;
+    transition: background 0.3s;
+  }
+  .character:hover {
+    background: linear-gradient(135deg, var(--bg-elevated), rgba(232,90,79,0.05));
+  }
+  /* Featured character (Mel) — spans both columns on desktop, has portrait */
+  .character-featured {
+    grid-column: 1 / -1;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    overflow: hidden;
+  }
+  @media (min-width: 700px) {
+    .character-featured {
+      grid-template-columns: 5fr 7fr;
+    }
+  }
+  .character-img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    border-right: 1px solid var(--bg-line);
+  }
+  @media (max-width: 699px) {
+    .character-img {
+      aspect-ratio: 4/3;
+      min-height: 0;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--bg-line);
+    }
+  }
+  .character-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .character-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    line-height: 1.25;
+    color: var(--page-1);
+    margin: 1rem 0 1.2rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--page-1);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+    text-shadow: 0 0 20px rgba(232,90,79,0.2);
+  }
+  .character-tag {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--page-3); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.6rem;
+  }
+  .character-name {
+    font-family: var(--font-display); font-weight: 400;
+    font-style: italic;
+    font-size: 1.6rem; line-height: 1.1;
+    margin-bottom: 0.7rem; letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .character-desc {
+    color: var(--ink-dim); font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .character-desc strong { color: var(--ink); font-weight: 500; }
+  .character-desc em { color: var(--page-1); font-style: italic; }
+
+  /* In-world source attribution — small text under the description */
+  .character-source {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--bg-line);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  /* ===== Full document treatment inside character cards ===== */
+  .document {
+    margin-top: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--bg-line);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.012), transparent 30%),
+      rgba(0,0,0,0.18);
+    position: relative;
+    font-family: var(--font-body);
+  }
+  .document::before {
+    /* Subtle dossier left-edge stripe */
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--page-1), transparent);
+    opacity: 0.5;
+  }
+  .document-masthead {
+    padding: 1.1rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--bg-line);
+    background: rgba(0,0,0,0.25);
+  }
+  .document-org {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .document-sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.35rem;
+    line-height: 1.4;
+  }
+  .document-classification {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+  }
+  .document-section {
+    padding: 1.3rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--bg-line);
+  }
+  .document-section:last-child { border-bottom: none; }
+  .document-h {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--page-1);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .document-h::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--page-1);
+    border-radius: 50%;
+  }
+  .document-section p {
+    font-size: 0.93rem;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+  .document-section p:last-child { margin-bottom: 0; }
+  .document-section p strong { color: var(--ink); font-weight: 500; }
+  .document-section p em {
+    color: var(--page-1);
+    font-style: italic;
+  }
+
+  /* Variant: Vendra-Konn (Mel) — warmer, slightly absurd corporate */
+  .document-corporate::before {
+    background: linear-gradient(180deg, var(--page-2), transparent);
+  }
+  .document-corporate .document-h { color: var(--page-2); }
+  .document-corporate .document-h::before { background: var(--page-2); }
+  .document-corporate .document-section p em { color: var(--page-2); }
+
+  /* Variant: Threat advisory (Jacob) — more alert */
+  .document-threat .document-masthead {
+    background: rgba(232,90,79,0.08);
+  }
+  .document-threat .document-classification {
+    color: var(--page-1);
+  }
+
+  /* Meta row — small dossier-style fields under the name */
+  .character-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--bg-line);
+  }
+  .character-meta span::before {
+    content: '·';
+    color: var(--page-1);
+    margin-right: 0.5rem;
+  }
+
+  /* Quote attribution (Jacob's quote is from the Nexweave advisory) */
+  .quote-attr {
+    display: block;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 0.68rem;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-top: 0.8rem;
+    font-variation-settings: normal;
+  }
+
+  /* Reverse layout: image on the right for the second card (Mel) */
+  @media (min-width: 700px) {
+    .character-featured-reverse {
+      grid-template-columns: 7fr 5fr;
+    }
+    .character-featured-reverse .character-img {
+      grid-column: 2;
+      grid-row: 1;
+      border-right: none;
+      border-left: 1px solid var(--bg-line);
+    }
+    .character-featured-reverse .character-body {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+
+  /* Jacob's silhouette card — uses real art instead of a portrait photo */
+  .character-jacob {
+    background:
+      linear-gradient(135deg, rgba(232,90,79,0.04) 0%, transparent 60%),
+      var(--bg-elevated);
+  }
+  .character-jacob:hover {
+    background:
+      linear-gradient(135deg, rgba(232,90,79,0.08) 0%, transparent 60%),
+      var(--bg-elevated);
+  }
+  /* Jacob's portrait is tall — shift the crop down to keep the rig in frame */
+  .character-jacob .character-img {
+    object-position: center 40%;
+  }
+
+  /* ---------- Works strip ---------- */
+  .works {
+    display: grid; grid-template-columns: 1fr;
+    gap: 1rem; margin-top: 2rem;
+  }
+  @media (min-width: 700px) { .works { grid-template-columns: repeat(3, 1fr); } }
+  .work {
+    padding: 1.8rem;
+    border: 1px solid var(--bg-line);
+    background: var(--bg-elevated);
+    position: relative;
+    transition: border-color 0.2s, transform 0.4s;
+  }
+  .work:hover {
+    border-color: var(--page-1);
+    transform: translateY(-3px);
+  }
+  .work-type {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--page-1); text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.8rem;
+  }
+  .work h4 {
+    font-family: var(--font-display); font-weight: 400;
+    font-style: italic;
+    font-size: 1.3rem; line-height: 1.15;
+    margin-bottom: 0.6rem; letter-spacing: -0.01em;
+  }
+  .work p {
+    color: var(--ink-dim); font-size: 0.9rem; line-height: 1.55;
+  }
+  .work-status {
+    margin-top: 1rem;
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .work-status.live { color: var(--page-3); }
+
+  /* Link variant — work card that is itself a link */
+  .work-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  .work-link:hover {
+    border-color: var(--page-3);
+    transform: translateY(-3px);
+  }
+  .work-link:hover .work-status.live {
+    color: var(--ink);
+  }
+  .work-subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.95rem !important;
+    color: var(--page-3) !important;
+    margin-bottom: 0.8rem !important;
+    letter-spacing: -0.005em;
+  }
+
+  /* Meta-strip link styling */
+  .meta-link {
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .meta-link:hover { color: var(--page-3); }
+
+  /* ---------- CTA ---------- */
+  .cta-strip {
+    margin-top: 5rem; padding: 4rem 0;
+    border-top: 1px solid var(--bg-line);
+    text-align: center;
+  }
+  .cta-strip h3 {
+    font-family: var(--font-display); font-weight: 300;
+    font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15; margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .cta-btn {
+    font-family: var(--font-mono); font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 1rem 1.8rem;
+    border: 1px solid var(--ink); color: var(--ink);
+    transition: all 0.25s;
+  }
+  .cta-btn.primary { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn:hover { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn.primary:hover { background: transparent; color: var(--page-1); }
+
+  footer {
+    border-top: 1px solid var(--bg-line); padding: 2.5rem 0;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint);
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; max-width: 1280px; }
+  footer a:hover { color: var(--page-1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">
+      <img src="/ceymer-logo.png" alt="Ceymer Studios logo" class="brand-logo" />
+      Ceymer Studios
+    </a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#education">Education</a>
+      <a href="/#apps">Apps</a>
+      <a href="/#creative">Creative</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap back-bar">
+  <a href="/#creative" class="back-link">← Back to creative work</a>
+</div>
+
+<header class="hero">
+  <img src="/hum-city-mel.jpg" alt="Mel, a Hum City character" class="hero-bg-img" />
+  <div class="horizon"></div>
+  <div class="wrap">
+    <div class="eyebrow">Cyberpunk · Worldbuilding · In development</div>
+    <h1 class="title">Welcome to<br/><em>Hum City.</em></h1>
+    <p class="lede">
+      A cyberpunk universe co-created with writing partner John Vogel. Original lore, original
+      characters, a serialized audio drama on YouTube, and a screenplay in active development.
+      Worldbuilding is the long game — and a better one when it's shared.
+    </p>
+  </div>
+</header>
+
+<div class="wrap meta-strip">
+  <div class="meta-grid">
+    <div><span>Status</span>In Active Development</div>
+    <div><span>Genre</span>Cyberpunk · Noir</div>
+    <div><span>Media</span>Audio · Script · Lore</div>
+    <div><span>Years</span>Long-term</div>
+    <div><span>Creators</span>Corey Miller &amp; John Vogel</div>
+    <div><span>Channel</span><a href="https://youtube.com/@synthandsyn" target="_blank" rel="noopener" class="meta-link">@synthandsyn ↗</a></div>
+  </div>
+</div>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The world</div>
+    <h2 class="section-h">A city that <em>hums.</em></h2>
+    <div class="prose">
+      <p>
+        Hum City is a place. It is also a sound — the constant low resonance of a city wired so
+        completely that you can feel it in your teeth. Power lines, signal towers, the underground
+        infrastructure of a metropolis that never decided where its hardware ended and its people
+        began.
+      </p>
+      <p class="pullquote">
+        It's a system <em>for people, not profit.</em>
+      </p>
+      <p>
+        The stories of Hum City are about the people who live inside that signal — what they want,
+        what they're willing to do to get it, who they betray along the way, and what's left of
+        them when the broadcast finally cuts out.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The cast</div>
+    <h2 class="section-h">Three figures in <em>the signal.</em></h2>
+    <div class="prose">
+      <p>
+        The easiest way to meet someone in Hum City is to find out who's been writing about them
+        — what the council prints, what the corporations file, what the threat boards circulate.
+        Three records. Three figures. Three institutions doing the talking.
+      </p>
+    </div>
+
+    <div class="characters">
+
+      <!-- CALYX -->
+      <div class="character character-featured">
+        <img src="/hum-city-calyx.jpg" alt="Councilor Calyx Tyrell" class="character-img" />
+        <div class="character-body">
+          <div class="character-tag">→ The councilor</div>
+          <div class="character-name">Calyx Tyrell</div>
+          <div class="character-meta">
+            <span>Co-Founder, Nexweave Systems</span>
+            <span>Senior Council Member · 152 years</span>
+          </div>
+          <p class="character-quote">"A system that cannot change is not a system. It is a monument. And monuments don't keep anyone warm."</p>
+
+          <div class="document">
+            <div class="document-masthead">
+              <div class="document-org">Hum City Civic Record</div>
+              <div class="document-sub">Office of the Council · Honoree Volume IX</div>
+              <div class="document-classification">Public Record · Council-Authorized</div>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Background</div>
+              <p>
+                Born into a lineage of data theorists and rogue engineers who believed that code
+                was not written but <em>grown,</em> Councilor Tyrell has spent over a century at
+                the intersection of consciousness, technology, and civic architecture. Raised in
+                an environment where biological data and digital systems were treated as
+                inseparable, he developed a foundational philosophy that would eventually reshape
+                how an entire city thinks about itself.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Foundational Work</div>
+              <p>
+                As co-founder of <strong>Nexweave Systems</strong>, Tyrell pioneered the
+                development of <strong>Soulcode</strong> — adaptive, semi-sentient architecture
+                that responds to human behavior rather than simply processing it. Where other
+                firms built tools, Nexweave built presence. The company grew under his guidance
+                from a fringe data archive into one of the most significant infrastructure systems
+                underpinning Hum City's daily function.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Service to the City</div>
+              <p>
+                As one of Hum City's original council members, Councilor Tyrell has served through
+                every era of the city's evolution — the idealism of its founding, the growing
+                pains of its expansion, and the difficult systemic reforms that have shaped the
+                modern city. He remains one of the few figures who has held continuous influence
+                across the full arc of Hum City's history, and is widely regarded as a stabilizing
+                force during its most turbulent transitions.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Present Service</div>
+              <p>
+                At 152 years old, Councilor Tyrell continues to hold an active seat on the
+                council, where he is known for his measured temperament, long-view thinking, and
+                unflinching commitment to what he calls <em>functional governance</em> — the
+                belief that a city that cannot adapt to survive is not worth preserving. He is
+                considered one of the most beloved public figures in Hum City's history.
+              </p>
+            </div>
+          </div>
+
+          <div class="character-source">— Hum City Civic Record · Office of the Council · Honoree Volume IX</div>
+        </div>
+      </div>
+
+      <!-- MEL -->
+      <div class="character character-featured character-featured-reverse">
+        <img src="/hum-city-mel.jpg" alt="Mel Moxie Danzer" class="character-img" />
+        <div class="character-body">
+          <div class="character-tag">→ The lead</div>
+          <div class="character-name">Mel Moxie Danzer</div>
+          <div class="character-meta">
+            <span>Alias: MoXxi</span>
+            <span>Status: Priority One Recovery</span>
+          </div>
+          <p class="character-quote">"I don't build for specs. I build for souls. Your arm's not just metal — it's memory. Your drone's not just code — it's company."</p>
+
+          <div class="document document-corporate">
+            <div class="document-masthead">
+              <div class="document-org">Vendra-Konn™ Internal Affairs Division</div>
+              <div class="document-sub">Confidential Asset Recovery Dossier</div>
+              <div class="document-classification">Clearance: Snacklord Ultra · Internal Circulation Only</div>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Physical Description</div>
+              <p>
+                Subject presents as female, approximately nineteen years of age, standing at
+                roughly five feet in height — a detail that has apparently done nothing to slow
+                her down. Hair: neon green, typically worn up, and by multiple field reports
+                dense enough to conceal at minimum one full-size tool. Eyes: described variously
+                as "large," "unsettling," and "weirdly sincere" — usually obscured behind a pair
+                of glowing blue optical goggles that emit an audible whirring sound when active.
+              </p>
+              <p>
+                Her clothing has been described in surveillance footage as — and this is a direct
+                quote from three separate VendBot™ field reports — <em>"like a scrapyard exploded
+                at a rave."</em> She carries a long, flexible cable she has been observed using
+                as a lasso, a climbing aid, a restraint device, and on at least one occasion, a
+                jump rope.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">The Core Offense</div>
+              <p>
+                The subject is conducting a sustained, unauthorized intrusion campaign against
+                Vendra-Konn™ vending infrastructure across multiple city districts. <strong>Units
+                she interfaces with cease to function as revenue-generating assets.</strong>
+                Product is dispensed without transaction. Data collection is interrupted. In
+                several cases, units have required full wipes and firmware reinstallation before
+                returning to operational status.
+              </p>
+              <p>
+                She is not stealing in any conventional sense. She is not extracting product for
+                resale. The losses are structural. Every unit she touches stops doing what it
+                was built to do, and starts doing something else entirely — something this office
+                is not prepared to detail in a general circulation document.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Field Engagement</div>
+              <p>
+                On three separate occasions, VendBot™ enforcement units dispatched to intercept
+                the subject were physically restrained using her cable and left inoperable at the
+                scene. In one incident, a VendBot™ unit was reprogrammed mid-confrontation.
+                Recovery teams found it in a state this office has declined to include in the
+                official maintenance log.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Current Status</div>
+              <p>
+                She does not have a corpchip implant. She does not appear in the BioData census.
+                She does not exist in any corporate registry. <strong>She does, however, exist on
+                our surveillance footage. Extensively.</strong>
+              </p>
+              <p>
+                This matter has been personally escalated to Priority One by
+                <strong>Gristo Vendra, Chief Executive.</strong> We will find her. We will have
+                answers.
+              </p>
+            </div>
+          </div>
+
+          <div class="character-source">— Vendra-Konn™ Internal Affairs · "Protecting the Snack. Securing the Future."</div>
+        </div>
+      </div>
+
+      <!-- JACOB -->
+      <div class="character character-featured character-jacob">
+        <img src="/hum-city-jacob.jpg" alt="Jacob Davies" class="character-img" />
+        <div class="character-body">
+          <div class="character-tag">→ At large</div>
+          <div class="character-name">Jacob Davies</div>
+          <div class="character-meta">
+            <span>Alias: "Nite Nite"</span>
+            <span>BioData: None on record</span>
+          </div>
+          <p class="character-quote">"He does not interact with the NetSea as a user. He corrupts it."<br/><span class="quote-attr">— Nexweave Public Threat Advisory</span></p>
+
+          <div class="document document-threat">
+            <div class="document-masthead">
+              <div class="document-org">Nexweave Systems · Seam Security Division</div>
+              <div class="document-sub">Public Threat Advisory · Council Mandate 7.1</div>
+              <div class="document-classification">Status: At Large · Active Warrant Issued</div>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Subject Background</div>
+              <p>
+                Davies is a product of the <strong>Vever community</strong> — a closed,
+                unregistered cultural enclave operating in Hum City's lower infrastructure
+                districts. The Vevers do not cooperate with civic oversight, do not participate
+                in BioData census registration, and actively resist transparency with regulatory
+                authorities. What is known about their internal structure, hierarchy, and
+                practices has been assembled from incident reports alone. They have provided
+                nothing voluntarily.
+              </p>
+              <p>
+                Davies himself carries no registered BioData identity. He holds no licensed jack
+                permit. He has no corporate enrollment, no civic record, and no verifiable history
+                prior to his first documented offense. <em>By every measure this city uses to
+                account for its citizens, he does not exist.</em>
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Documented Offenses</div>
+              <p>
+                Davies has carried out multiple confirmed infiltrations against protected Nexweave
+                infrastructure. These are not acts of civil disobedience. They are not protests.
+                They are deliberate, targeted attacks against systems that underpin the data
+                security of every licensed individual in this city.
+              </p>
+              <p>
+                During his most significant incursion, Davies breached the outer Seam Archive
+                vaults — restricted soulcode storage holding the protected data of Nexweave
+                clients and personnel. He incapacitated multiple licensed Loom operatives on
+                active duty. He left each with <strong>vèvè glyph markers</strong> burned
+                directly into their interface hardware — a form of sabotage requiring complete
+                vault wipes and causing significant operational disruption.
+              </p>
+            </div>
+
+            <div class="document-section">
+              <div class="document-h">Assessment</div>
+              <p>
+                His intrusion method does not conform to any licensed interface protocol on
+                record. His jack rig is unlicensed, self-constructed from salvaged components, and
+                modified in ways that continue to resist full technical analysis. The glyph
+                structures he embeds into compromised systems have caused cascading failures in
+                biometric vault logic, disrupted soulcode containment architecture, and in
+                documented cases rendered Nexweave personnel non-responsive for extended periods.
+              </p>
+              <p>
+                He is not a mercenary. He is not corporate-backed. He is answerable to no
+                authority that this city can currently reach. <strong>That is precisely why this
+                advisory exists.</strong>
+              </p>
+            </div>
+          </div>
+
+          <div class="character-source">— Nexweave Systems · Office of the Director · Authorized under Council Mandate 7.1</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The works</div>
+    <h2 class="section-h">Three media, one universe.</h2>
+    <div class="works">
+      <a href="https://youtube.com/@synthandsyn" target="_blank" rel="noopener" class="work work-link">
+        <div class="work-type">→ Audio Drama · YouTube</div>
+        <h4>Synth &amp; Syn</h4>
+        <p class="work-subtitle">home of Hum City</p>
+        <p>An ongoing serialized audio drama — the entry point for the universe. Created and produced by Corey Miller &amp; John Vogel.</p>
+        <div class="work-status live">● Live · Watch the broadcast →</div>
+      </a>
+      <div class="work">
+        <div class="work-type">→ Screenplay</div>
+        <h4>The Founders' Fall</h4>
+        <p>A feature screenplay set in the origin era of Hum City. Currently in active development.</p>
+        <div class="work-status">In progress</div>
+      </div>
+      <div class="work">
+        <div class="work-type">→ Lore</div>
+        <h4>The codex</h4>
+        <p>Years of accumulated worldbuilding — the foundation that everything else stands on.</p>
+        <div class="work-status">Ongoing</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">Why bother</div>
+    <h2 class="section-h">Worldbuilding is <em>the long game.</em></h2>
+    <div class="prose">
+      <p>
+        Software gets shipped, used, and superseded. Worlds don't. A story that lands stays in
+        someone's head for years. A character people care about outlives the platform they were
+        introduced on. Hum City is the project John and I expect to be working on for decades —
+        the slow, patient counterweight to a career spent shipping apps.
+      </p>
+      <p>
+        Collaboration changes the shape of it. A solo writer can be exact; two writers building
+        the same world have to be <strong>honest with each other</strong> — about what works, what
+        doesn't, what the city sounds like when neither of us is the one talking. The result is
+        bigger than either of us would make alone, and more strange.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap cta-strip">
+  <h3>Hum City is still being broadcast.</h3>
+  <div class="cta-row">
+    <a href="https://youtube.com/@synthandsyn" target="_blank" rel="noopener" class="cta-btn primary">Watch on YouTube →</a>
+    <a href="/#contact" class="cta-btn">Get in touch</a>
+    <a href="/" class="cta-btn">Back to Ceymer Studios</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ceymer Studios LLC · Registered in Pennsylvania</span>
+    <span><a href="/">ceymer-studios.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

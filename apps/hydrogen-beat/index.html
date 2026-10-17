@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hydrogen Beat — Ceymer Studios</title>
+<meta name="description" content="An experimental timekeeping app based on the hydrogen line frequency. 100 Beats per day." />
+<link rel="canonical" href="https://ceymer-studios.com/apps/hydrogen-beat" />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+
+<meta property="og:title" content="Hydrogen Beat — A different way to feel time." />
+<meta property="og:description" content="An experimental timekeeping app based on the hydrogen line frequency. Built by Ceymer Studios." />
+<meta property="og:image" content="https://ceymer-studios.com/ceymer-logo.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=JetBrains+Mono:wght@300;400;500&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #050a0c;
+    --bg-elevated: #0a1418;
+    --bg-line: #112025;
+    --ink: #ececec;
+    --ink-dim: #9aa8ad;
+    --ink-faint: #5a6a70;
+    --accent: #7df9ff;
+    /* HB palette — cyan, scientific, cool */
+    --page-1: #7df9ff;
+    --page-2: #4dd0a0;
+    --page-glow: rgba(125, 249, 255, 0.18);
+
+    --font-display: 'Fraunces', 'Times New Roman', serif;
+    --font-body: 'Inter Tight', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --max: 1100px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); line-height: 1.65;
+    overflow-x: hidden; -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    z-index: 100; opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/></svg>");
+    mix-blend-mode: overlay;
+  }
+  ::selection { background: var(--page-1); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(5, 10, 12, 0.75);
+    border-bottom: 1px solid var(--bg-line);
+  }
+  nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem; padding-bottom: 1rem; max-width: 1280px;
+  }
+  .brand {
+    font-family: var(--font-display); font-weight: 500; font-size: 1.1rem;
+    letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.65rem;
+  }
+  .brand:hover { opacity: 0.75; }
+  .brand-logo { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; }
+  .nav-links {
+    display: flex; gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-dim);
+  }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  .back-bar { padding-top: 7rem; padding-bottom: 1rem; }
+  .back-link {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-faint); display: inline-flex; align-items: center;
+    gap: 0.6rem; transition: color 0.2s, gap 0.3s;
+  }
+  .back-link:hover { color: var(--page-1); gap: 0.9rem; }
+
+  /* ---------- Frequency visual hero ---------- */
+  .hero {
+    padding: 4rem 0 4rem; position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .frequency-display {
+    font-family: var(--font-mono);
+    color: var(--page-1);
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+  }
+  .frequency-display .value {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-style: italic;
+    margin-top: 0.5rem;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  h1.title {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    line-height: 1; letter-spacing: -0.035em;
+    margin-bottom: 2rem;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+  h1.title em {
+    font-style: italic; color: var(--page-1);
+    font-variation-settings: "opsz" 144, "SOFT" 100, "WONK" 1;
+  }
+  .lede {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.5; color: var(--ink-dim);
+    max-width: 50ch; margin: 0 auto;
+  }
+
+  /* Wave visualization */
+  .wave-container {
+    margin: 4rem auto 0;
+    max-width: 800px;
+    height: 120px;
+    position: relative;
+  }
+  .wave-svg {
+    width: 100%; height: 100%;
+  }
+  .wave-svg path {
+    stroke: var(--page-1);
+    stroke-width: 1;
+    fill: none;
+    filter: drop-shadow(0 0 8px var(--page-glow));
+  }
+  .wave-svg .wave-bg {
+    stroke: var(--page-1);
+    stroke-opacity: 0.15;
+    stroke-width: 1;
+  }
+  .wave-marker {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--page-1);
+    box-shadow: 0 0 24px var(--page-1), 0 0 48px var(--page-glow);
+    animation: pulse-mark 1.42s ease-in-out infinite;
+  }
+  @keyframes pulse-mark {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0.6; }
+  }
+
+  /* ---------- Meta strip ---------- */
+  .meta-strip {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--bg-line);
+    border-bottom: 1px solid var(--bg-line);
+    margin: 4rem 0;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .meta-grid > div span {
+    display: block; color: var(--ink-faint);
+    font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+
+
+  /* ---------- Screenshot showcase ---------- */
+  .screenshot-showcase {
+    padding: 1rem 0 5rem;
+    text-align: center;
+  }
+  .wrap-narrow {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .phone-large {
+    aspect-ratio: 9/19;
+    max-width: 320px;
+    margin: 0 auto 1.5rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 28px;
+    padding: 8px;
+    background: rgba(0,0,0,0.4);
+    box-shadow:
+      0 30px 60px -15px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(255,255,255,0.04) inset,
+      0 0 60px var(--page-glow);
+    position: relative;
+  }
+  .phone-large::before {
+    content: ''; position: absolute;
+    top: 12px; left: 50%; transform: translateX(-50%);
+    width: 48px; height: 5px;
+    background: rgba(255,255,255,0.15); border-radius: 3px;
+    z-index: 3;
+  }
+  .phone-large img {
+    width: 100%; height: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+  }
+  .caption {
+    font-family: var(--font-mono); font-size: 0.78rem;
+    color: var(--ink-faint); letter-spacing: 0.02em;
+    max-width: 50ch; margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ---------- Sections ---------- */
+  section.body-section { padding: 4rem 0; }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.72rem;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--ink-faint); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-label::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--page-1); border-radius: 50%;
+  }
+  h2.section-h {
+    font-family: var(--font-display); font-weight: 300;
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem; max-width: 28ch;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  h2.section-h em { font-style: italic; color: var(--page-1); }
+  .prose p {
+    font-size: 1.05rem; color: var(--ink-dim);
+    margin-bottom: 1.2rem; max-width: 62ch;
+  }
+  .prose p strong { color: var(--ink); font-weight: 500; }
+  .prose code {
+    font-family: var(--font-mono); font-size: 0.88em;
+    padding: 0.15rem 0.4rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--bg-line);
+    border-radius: 3px;
+    color: var(--page-1);
+  }
+
+  /* ---------- The math block ---------- */
+  .math-block {
+    margin: 2rem 0;
+    padding: 2.5rem;
+    border: 1px solid var(--bg-line);
+    background: linear-gradient(180deg, var(--bg-elevated), var(--bg));
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+  .math-line {
+    color: var(--ink-dim); font-size: 0.95rem;
+    margin: 0.5rem 0; letter-spacing: 0.02em;
+  }
+  .math-line .v { color: var(--page-1); }
+  .math-line.big {
+    font-family: var(--font-display); font-style: italic;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    color: var(--ink); margin: 1.2rem 0;
+  }
+
+  /* ---------- War stories ---------- */
+  .war-story {
+    border-left: 2px solid var(--page-1);
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, var(--page-glow) 0%, transparent 50%);
+  }
+  .war-story-tag {
+    font-family: var(--font-mono); font-size: 0.7rem;
+    color: var(--page-1); text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.6rem;
+  }
+  .war-story h4 {
+    font-family: var(--font-display); font-weight: 400;
+    font-size: 1.3rem; line-height: 1.2;
+    margin-bottom: 0.8rem; letter-spacing: -0.01em;
+  }
+  .war-story p {
+    font-size: 0.98rem; color: var(--ink-dim);
+    margin-bottom: 0.8rem; max-width: 64ch;
+  }
+  .war-story p:last-child { margin-bottom: 0; }
+
+  /* ---------- Stack ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem; margin-top: 1.5rem;
+    font-family: var(--font-mono); font-size: 0.85rem;
+  }
+  .stack-grid > div {
+    padding: 1.2rem;
+    border: 1px solid var(--bg-line);
+    background: var(--bg-elevated);
+  }
+  .stack-grid > div span {
+    display: block; color: var(--ink-faint);
+    font-size: 0.65rem; text-transform: uppercase;
+    letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-strip {
+    margin-top: 5rem; padding: 4rem 0;
+    border-top: 1px solid var(--bg-line);
+    text-align: center;
+  }
+  .cta-strip h3 {
+    font-family: var(--font-display); font-weight: 300;
+    font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.15; margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .cta-btn {
+    font-family: var(--font-mono); font-size: 0.85rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 1rem 1.8rem;
+    border: 1px solid var(--ink); color: var(--ink);
+    transition: all 0.25s;
+  }
+  .cta-btn.primary { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn:hover { background: var(--page-1); color: var(--bg); border-color: var(--page-1); }
+  .cta-btn.primary:hover { background: transparent; color: var(--page-1); }
+
+  footer {
+    border-top: 1px solid var(--bg-line); padding: 2.5rem 0;
+    font-family: var(--font-mono); font-size: 0.75rem; color: var(--ink-faint);
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; max-width: 1280px; }
+  footer a:hover { color: var(--page-1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="brand">
+      <img src="/ceymer-logo.png" alt="Ceymer Studios logo" class="brand-logo" />
+      Ceymer Studios
+    </a>
+    <div class="nav-links">
+      <a href="/#about">About</a>
+      <a href="/#education">Education</a>
+      <a href="/#skills">Skills</a>
+      <a href="/#apps">Apps</a>
+      <a href="/#creative">Creative</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap back-bar">
+  <a href="/#apps" class="back-link">← Back to apps</a>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="frequency-display">
+      ν<sub>H</sub> = 1420.405751 MHz
+      <span class="value">The hydrogen line, the universe's quietest clock.</span>
+    </div>
+    <h1 class="title">100 Beats <em>per day.</em></h1>
+    <p class="lede">
+      Hydrogen Beat is an experimental timekeeping app that throws out the 24-hour day and rebuilds
+      time around something more fundamental — the resonance frequency of neutral hydrogen.
+      A different way to feel time passing.
+    </p>
+
+    <div class="wave-container">
+      <svg class="wave-svg" viewBox="0 0 800 120" preserveAspectRatio="none">
+        <path class="wave-bg" d="M 0,60 Q 50,30 100,60 T 200,60 T 300,60 T 400,60 T 500,60 T 600,60 T 700,60 T 800,60" />
+        <path d="M 0,60 Q 50,20 100,60 T 200,60 T 300,60 T 400,60 T 500,60 T 600,60 T 700,60 T 800,60" stroke-dasharray="4 4" />
+      </svg>
+      <div class="wave-marker"></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap meta-strip">
+  <div class="meta-grid">
+    <div><span>Status</span>Live on Play Store</div>
+    <div><span>Package</span>com.hydrogenline.clock</div>
+    <div><span>Type</span>Experimental</div>
+    <div><span>Year</span>2024–2026</div>
+    <div><span>Role</span>Solo build</div>
+  </div>
+<section class="screenshot-showcase">
+  <div class="wrap-narrow">
+    <div class="phone-large">
+      <img src="/hydrogen-beat-screen.jpg" alt="App screenshot" />
+    </div>
+    <p class="caption">The clock face — current Beat displayed in the round, threaded through a sine wave. Galactic Standard Time below.</p>
+  </div>
+</section>
+
+</div>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The idea</div>
+    <h2 class="section-h">Time, but <em>tuned differently.</em></h2>
+    <div class="prose">
+      <p>
+        The hydrogen line — 1420.405751 MHz — is the emission frequency of neutral hydrogen, the
+        most abundant element in the universe. Radio astronomers point dishes at it to map galaxies.
+        SETI proposed it as the natural channel for interstellar communication. It is, in a real
+        sense, the most universal frequency we know.
+      </p>
+      <p>
+        Hydrogen Beat takes that frequency and uses it as a basis for a different unit of time:
+        the <strong>Beat</strong>. One day is divided into exactly 100 Beats. No hours, no minutes,
+        no seconds — just a single, fluid number from 00.00 to 99.99 that moves smoothly through
+        your day.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The math</div>
+    <h2 class="section-h">How a Beat works.</h2>
+    <div class="math-block">
+      <div class="math-line">1 day = <span class="v">86,400 seconds</span></div>
+      <div class="math-line">1 day = <span class="v">100 Beats</span></div>
+      <div class="math-line big">→ 1 Beat = 864 seconds (14 min 24 sec)</div>
+      <div class="math-line">Each Beat subdivides decimally → <span class="v">0.01 Beat = 8.64 seconds</span></div>
+    </div>
+    <div class="prose">
+      <p>
+        It's clean, it's symmetric, and once you start glancing at it you stop thinking in arbitrary
+        sexagesimal-meets-decimal hybrids. You start feeling the day as one continuous gradient.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The build · Real talk</div>
+    <h2 class="section-h">What it took to ship something <em>this strange.</em></h2>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 01</div>
+      <h4>The Wear OS chapter that didn't work out</h4>
+      <p>
+        Hydrogen Beat seemed like a natural fit for a watch face — what's more "watch" than time
+        itself? A serious Wear OS build attempt followed. Several weeks of work.
+      </p>
+      <p>
+        It was ultimately abandoned. The Samsung Wear OS platform limitations — around watch face
+        APIs, custom rendering, and what an app is actually allowed to do — made the experience
+        I wanted impossible without compromises that gutted the concept. The phone app stayed; the
+        watch face shelved. <strong>Sometimes the best engineering decision is to walk away from a
+        platform that won't let you build the thing properly.</strong>
+      </p>
+    </div>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 02</div>
+      <h4>Making "strange" feel obvious</h4>
+      <p>
+        The hardest UX problem with a novel timekeeping system isn't displaying the time — it's
+        making someone who's used 24-hour days their entire life able to glance at <code>47.32</code>
+        and intuit what that <em>means</em>. The current build leans on visual context (the wave
+        position, percentage-style framing) so the number lands without needing a conversion chart.
+      </p>
+    </div>
+
+    <div class="war-story">
+      <div class="war-story-tag">War story · 03</div>
+      <h4>A passion project that taught me discipline</h4>
+      <p>
+        Hydrogen Beat was never going to be a unicorn app. That was clear from day one. But it
+        taught me more about <strong>shipping a complete product through Google Play</strong> —
+        signing, ProGuard, store listing, screenshots, content rating, privacy policy — than
+        any tutorial could. The experimental nature was a feature.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="body-section">
+  <div class="wrap">
+    <div class="section-label">The stack</div>
+    <h2 class="section-h">Built with.</h2>
+    <div class="stack-grid">
+      <div><span>Platform</span>Android (Native)</div>
+      <div><span>Type</span>Experimental Clock</div>
+      <div><span>Distribution</span>Google Play</div>
+      <div><span>Wear OS</span>Attempted · Shelved</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap cta-strip">
+  <h3>Hydrogen Beat is live on the Play Store.</h3>
+  <div class="cta-row">
+    <a href="https://play.google.com/store/apps/details?id=com.hydrogenline.clock" class="cta-btn primary" target="_blank" rel="noopener">Get Hydrogen Beat</a>
+    <a href="/#contact" class="cta-btn">Get in touch →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ceymer Studios LLC · Registered in Pennsylvania</span>
+    <span><a href="/">ceymer-studios.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "ceymer-chat",
+  "version": "2.0.0",
+  "description": "ADIN site-companion chat backend for ceymer-studios.com (Claude)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": { "start": "node index.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "express": "^4.19.0",
+    "cors": "^2.8.5"
+  }
+}

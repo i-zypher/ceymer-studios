@@ -1,12 +1,7 @@
-# Ceymer Studios - robots.txt
-# Allow all search engines to crawl the entire site
+# robots.txt for ceymer-studios.com
+# https://www.robotstxt.org/
 
 User-agent: *
 Allow: /
 
-# Sitemap location
 Sitemap: https://ceymer-studios.com/sitemap.xml
-
-# Crawl-delay (optional - helps prevent server overload)
-# Most modern bots ignore this, but doesn't hurt to have
-Crawl-delay: 1
