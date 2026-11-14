@@ -22,7 +22,7 @@
   const SCRIPT = {
     start: {
       text: "Hi, I'm ADIN! I help people learn technology in Corey's apps — and here, I answer questions about his work. What would you like to know?",
-      chips: ['who', 'apps', 'war', 'humcity', 'contact']
+      chips: ['who', 'apps', 'subplus', 'humcity', 'contact']
     },
     who: {
       label: "Who is Corey?",
@@ -31,8 +31,18 @@
     },
     apps: {
       label: "Show me the apps",
-      text: "Two are live on both app stores: me — ADIN, a tech tutor for older adults with a safe practice phone — and Scapeboard, a business manager for landscapers. There's also Your Leader, a civic-engagement app, Ceymer Trading, an algorithmic trading lab with an AI decision layer, and Hum City, a cyberpunk audio drama Corey co-creates with John Vogel. Tap any card to read the full story.",
-      chips: ['trading', 'war', 'humcity']
+      text: "The newest is Subscription Plus, a parody game about a subscription you can't cancel. It's live on the web and on Google Play. Two more are live on both app stores: me, ADIN, a tech tutor for older adults with a safe practice phone, and Scapeboard, a business manager for landscapers. There's also Your Leader, a civic-engagement app, Ceymer Trading, a trading lab with an AI decision layer, and Hum City, a cyberpunk book Corey writes with John Vogel. Tap any card to read the full story.",
+      chips: ['subplus', 'trading', 'humcity']
+    },
+    subplus: {
+      label: "Subscription Plus?",
+      text: "Subscription Plus is a parody game: you get a 10-minute free trial and one goal, cancel before it ends. In your way are upgrade popups, CAPTCHAs built to fail you, and Brad, an AI support agent who helps with anything except cancelling. It's live at subscriptionplusgame.com and on Google Play, with iOS next.",
+      chips: ['subplusbuild', 'apps', 'contact']
+    },
+    subplusbuild: {
+      label: "How was it built?",
+      text: "Corey wrote it in React and TypeScript, pairing with Claude as he went. Brad is Claude running on a small Cloud Run service with a daily budget and per-player limits, and if the AI is unavailable a scripted Brad Lite takes over so nobody sees an error. The game started as a folder on this site, then moved to its own home at subscriptionplusgame.com, and the old address redirects there. Every push to GitHub deploys itself with keyless sign-in to Google Cloud. A daily job has Claude review the Brad replies players report. The jingle got out of hand too: it's now an eight-track album under Corey's artist name, Nate Miller.",
+      chips: ['subplus', 'process', 'contact']
     },
     trading: {
       label: "The trading app?",
@@ -46,7 +56,7 @@
     },
     humcity: {
       label: "What's Hum City?",
-      text: "Hum City is a serialized cyberpunk audio-drama universe Corey co-creates with his writing partner John Vogel, published on their YouTube channel Synth & Syn. It's also an AI playground — Corey trained a small language model from scratch on the Hum City corpus. Its page is the only dark one on this site. Fitting, right?",
+      text: "Hum City is a cyberpunk book and universe Corey co-creates with his writing partner John Vogel, with audio episodes on their YouTube channel Synth & Syn. You can read an excerpt on the Hum City page. It's also an AI playground: Corey trained a small language model from scratch on the Hum City corpus.",
       chips: ['apps', 'who', 'contact']
     },
     process: {
@@ -448,4 +458,12 @@
       addChips(SCRIPT.start.chips);
     }
   });
+  /* let the page's own "Ask ADIN" box open the chat with a question */
+  window.adinAsk = function (q) {
+    openChat();
+    q = String(q || '').trim();
+    if (!q) return;
+    input.value = q;
+    if (form.requestSubmit) form.requestSubmit(); else form.dispatchEvent(new Event('submit', { cancelable: true }));
+  };
 })();
