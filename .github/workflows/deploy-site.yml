@@ -1,0 +1,38 @@
+# Deploys ceymer-studios.com (the project's default Firebase Hosting site) on
+# every push to main. Static files only: the ADIN chat backend (server/) is a
+# separate Cloud Run service and is never touched by this workflow.
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "server/**"
+      - "public-docs-backup/**"
+      - "**.md"
+  workflow_dispatch:
+
+# A newer push replaces a deploy that hasn't finished yet
+concurrency:
+  group: deploy-site
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write # keyless sign-in to Google Cloud
+
+jobs:
+  deploy:
+    # Skips quietly until the repository variables are set
+    if: ${{ vars.GCP_WIF_PROVIDER != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+
+      - name: Deploy to Firebase Hosting (ceymer-studios.com only)
+        run: npx --yes firebase-tools@15.34.2 deploy --only hosting --project ceymer-studios-site --non-interactive

@@ -3,6 +3,10 @@
     "public": "public",
     "cleanUrls": true,
     "trailingSlash": false,
+    "redirects": [
+  { "source": "/subscriptionplus", "destination": "https://subscriptionplusgame.com", "type": 301 },
+  { "source": "/subscriptionplus/:path*", "destination": "https://subscriptionplusgame.com/:path", "type": 301 }
+],
     "ignore": [
       "firebase.json",
       "**/.*",

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Subscription Plus — case study · Ceymer Studios</title>
+<meta name="description" content="A parody game about the subscription you can't cancel, starring Brad, an AI support agent with guardrails, real structured upsells and a Claude agent that reviews his reported replies." />
+<link rel="icon" type="image/png" href="/ceymer-logo.png" />
+<link rel="apple-touch-icon" href="/ceymer-logo.png" />
+<link rel="stylesheet" href="/assets/ceymer.css?v=8" />
+</head>
+<body data-adin-page="subscription-plus-case">
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/"><img src="/ceymer-logo.png" alt="" class="brand-logo" style="height:24px;width:auto" onerror="this.style.display='none'" />Ceymer Studios</a>
+    <nav class="site-nav">
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="mailto:corey@ceymer-studios.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="band tint-blush">
+  <div class="wrap">
+    <div class="eyebrow">Game case study · The funny one</div>
+    <h1 class="display">A subscription you can't cancel, <mark>played for laughs.</mark></h1>
+    <p class="lede" style="margin-top:1.4rem">
+      Subscription Plus gives you a 10-minute free trial and one goal: cancel before it ends.
+      Between you and the exit stand an avalanche of upgrades, pop-up ads you can actually buy,
+      CAPTCHAs designed to fail you, and Brad, an AI support agent who will gladly help with
+      anything except that.
+    </p>
+    <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.6rem">
+      <a class="btn primary" href="/subscriptionplus/" target="_blank" rel="noopener">Play it free ↗</a>
+      <a class="btn" href="https://github.com/i-zypher/SubscriptionPlus" target="_blank" rel="noopener">View the code on GitHub ↗</a>
+    </div>
+    <div class="case-meta">
+      <div><span>Role</span>Designer &amp; developer</div>
+      <div><span>Stack</span>React · TypeScript · Capacitor</div>
+      <div><span>AI</span>Claude on Cloud Run</div>
+      <div><span>Status</span>Live on the web · iOS + Android next</div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="band" data-adin="I tried to cancel once. Brad sold me Robot Plus. I don't even know what it does.">
+  <div class="wrap reading">
+    <div class="eyebrow">01 / The idea</div>
+    <h2 class="h">Everyone has fought a cancel button. Nobody has won.</h2>
+    <p class="body">
+      Dark patterns are everywhere: the free trial that quietly renews, the "No thanks, I hate
+      saving money" link, the support chat that answers every question but yours. Most people
+      have felt it. Very few products make fun of it.
+    </p>
+    <p class="body">
+      <strong>Subscription Plus turns those patterns into the game itself.</strong> Every
+      "No thanks" asks if you're sure, then asks if you meant yes. The cookie banner has 40
+      partners, and some switch themselves back on. The support agent is obviously a robot who
+      insists he isn't. And every run ends with an itemized receipt of everything you got charged
+      for, made to be shared.
+    </p>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="band tint-adin">
+  <div class="wrap">
+    <div class="reading">
+      <div class="eyebrow">02 / Engineering decisions</div>
+      <h2 class="h">The hard part was letting an AI be funny without letting it run the game.</h2>
+      <p class="body">
+        Brad is a language model playing a character, and a character is only fun if he stays in
+        it. The design work was deciding exactly what the model controls, and what it never does.
+      </p>
+      <div class="shiplog">
+        <div class="log-entry"><div class="log-head"><span class="log-tag">AI</span><h4>The game owns the rules</h4></div>
+          <p>The game, not the model, decides charges, transfers and endings. Brad only writes his
+          lines, as strict JSON. When he pitches a made-up plan ("Pet Plus, $6.99/mo"), it comes back
+          as a structured offer the server validates, so if the player says yes, the game can
+          <em>really</em> add it to the bill.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">AI</span><h4>Four Brads, one escalating joke</h4></div>
+          <p>Ask for a manager and you get the next Brad, each with his own persona, and the page
+          itself degrades with him: a modern app, a 2014 helpdesk, a 2003 portal, then a broken
+          1998 page with JavaScript errors and a dead Java applet.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">Cost</span><h4>Guardrails that cost pennies</h4></div>
+          <p>A small Cloud Run service with a daily dollar budget, per-run and per-IP limits, an
+          origin allowlist and nothing the player types ever stored. If the AI is unavailable,
+          "Brad Lite" takes over on the device, with small talk across 24 topics, so players never
+          see an error.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">Safety</span><h4>An AI that reviews the AI</h4></div>
+          <p>Every Brad reply has a Report button. Each morning, a GitHub Action reads the day's
+          reports from Cloud Logging, has Claude judge each one (just Brad being Brad, or a real
+          problem) and suggest prompt fixes, then files a private digest.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">UX</span><h4>Accessible, even when it's a joke</h4></div>
+          <p>Light and dark themes, adjustable text size, Reduce Motion, High Contrast and captions
+          for every sound. The audio CAPTCHA's answer is captioned too, so deaf players can pass it.</p></div>
+        <div class="log-entry"><div class="log-head"><span class="log-tag">Ship</span><h4>One codebase, three platforms</h4></div>
+          <p>The same React code runs on the web and as Capacitor apps for iOS and Android, with a
+          native share sheet, notch-safe layouts and win-back reminders that only lapsed players
+          ever see. Every push deploys itself, with keyless sign-in to Google Cloud.</p></div>
+      </div>
+    </div>
+    <div class="fig-grid fig-3 reveal">
+      <figure><div class="frame shot"><img src="/subscriptionplus-intro.jpg" alt="The free trial screen with a 10:00 countdown" loading="lazy" /></div><figcaption><strong>The free trial.</strong> Ten minutes, one goal.</figcaption></figure>
+      <figure><div class="frame shot"><img src="/subscriptionplus-upgrade.jpg" alt="The final upgrade tier, buried in confetti" loading="lazy" /></div><figcaption><strong>The upgrades.</strong> Five tiers, more confetti each time.</figcaption></figure>
+      <figure><div class="frame shot"><img src="/subscriptionplus-home.jpg" alt="The home screen with the monthly total and an affirmation" loading="lazy" /></div><figcaption><strong>Home.</strong> Member since just now. Member until forever.</figcaption></figure>
+      <figure><div class="frame shot"><img src="/subscriptionplus-brad.jpg" alt="Live support chat with Brad" loading="lazy" /></div><figcaption><strong>Brad.</strong> "I'm a real person." He is not.</figcaption></figure>
+      <figure><div class="frame shot"><img src="/subscriptionplus-brad1998.jpg" alt="The final BRAD page, styled as a broken 1998 website" loading="lazy" /></div><figcaption><strong>BRAD.</strong> Four transfers later, the page is from 1998.</figcaption></figure>
+      <figure><div class="frame shot"><img src="/subscriptionplus-settings.jpg" alt="Settings with real and joke options side by side" loading="lazy" /></div><figcaption><strong>Settings.</strong> Real accessibility, plus a Moon Laser.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="band" data-adin="The jingle is stuck in my head. I don't even have a head. It's in my everything.">
+  <div class="wrap reading">
+    <div class="eyebrow">03 / What it proved</div>
+    <h2 class="h">Comedy is a product discipline.</h2>
+    <p class="body">
+      A joke only lands if everything around it works. Subscription Plus is in the portfolio
+      because it shows <strong>an LLM character shipped with real product discipline</strong>:
+      clear boundaries between model and game, cost limits that hold under traffic, a fallback
+      for every failure, moderation with a human in the loop, and accessibility treated as a
+      requirement rather than a feature.
+    </p>
+    <p class="body">
+      It even has its own soundtrack. Each run plays one of six editions of the Subscription Plus
+      jingle (polka, bluegrass, death metal and more), released as a real album,
+      <em>Subscription Plus! The Album</em>.
+    </p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span><a href="/apps/adin/">Next case study · ADIN →</a></span>
+    <span>© 2026 Ceymer Studios LLC</span>
+  </div>
+</footer>
+
+<script src="/assets/adin.js?v=8" defer></script>
+</body>
+</html>
