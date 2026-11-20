@@ -191,7 +191,8 @@
     <form id="adin-form">
       <input id="adin-input" type="text" placeholder="Ask about Corey's work…" autocomplete="off" />
       <button id="adin-send" type="submit">Send</button>
-    </form>`;
+    </form>
+    <div class="chat-note">Chats are logged to help improve ADIN.</div>`;
   document.body.appendChild(chat);
 
   const char = document.getElementById('adin-char');
@@ -350,6 +351,12 @@
 
   /* ---------- chat ---------- */
   const history = []; // {role, content} for the AI endpoint
+  // Groups one visitor's messages into a single conversation in the server logs
+  let sessionId = sessionStorage.getItem('adin-session');
+  if (!sessionId) {
+    sessionId = (crypto.randomUUID && crypto.randomUUID()) || String(Date.now()) + Math.random().toString(36).slice(2);
+    sessionStorage.setItem('adin-session', sessionId);
+  }
 
   function addMsg(text, who) {
     const m = document.createElement('div');
@@ -442,7 +449,7 @@
       const res = await fetch(AI_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: q, history: history.slice(-12) })
+        body: JSON.stringify({ message: q, history: history.slice(-12), sessionId })
       });
       if (!res.ok) throw new Error('bad status');
       const data = await res.json();

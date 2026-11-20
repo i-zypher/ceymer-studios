@@ -118,6 +118,7 @@ function buildMessages(history, message) {
 app.post(['/chat', '/api/chat'], async (req, res) => {
   try {
     const { message, history = [] } = req.body || {};
+    const sessionId = String(req.body?.sessionId || 'none').slice(0, 64);
     if (!message || typeof message !== 'string' || !message.trim() || message.length > 1000) {
       return res.status(400).json({ error: 'bad request' });
     }
@@ -145,6 +146,22 @@ app.post(['/chat', '/api/chat'], async (req, res) => {
     if (response.stop_reason === 'max_tokens') {
       console.warn('reply hit max_tokens; usage:', JSON.stringify(response.usage || {}));
     }
+
+    /* One structured line per message → Cloud Logging.
+       Logs Explorer filter: jsonPayload.message="adin_chat" */
+    console.log(JSON.stringify({
+      severity: 'INFO',
+      message: 'adin_chat',
+      sessionId,
+      turn: Array.isArray(history) ? history.length : 0,
+      model: MODEL,
+      userMessage: message.trim(),
+      reply,
+      stopReason: response.stop_reason,
+      usage: response.usage,
+      ip: req.ip || 'unknown',
+      userAgent: String(req.headers['user-agent'] || '').slice(0, 200)
+    }));
 
     res.json({ reply });
   } catch (err) {
