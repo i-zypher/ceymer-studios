@@ -387,6 +387,7 @@ footer.site-foot a { color: var(--ink-dim); }
 }
 .q-chip:hover { border-color: var(--adin-deep); color: var(--adin-deep); transform: translateY(-1px); }
 #adin-form { display: flex; gap: 0.55rem; padding: 0.9rem; border-top: 1px solid var(--line-soft); background: var(--card); }
+#adin-chat .chat-note { font-family: var(--f-mono); font-size: 0.58rem; color: var(--ink-faint); text-align: center; padding: 0 0.9rem 0.7rem; background: var(--card); }
 #adin-input {
   flex: 1; border: 1px solid var(--line); border-radius: 999px;
   padding: 0.6rem 1.05rem; font-family: var(--f-body); font-size: 0.92rem;
