@@ -4,9 +4,27 @@
     "cleanUrls": true,
     "trailingSlash": false,
     "redirects": [
-  { "source": "/subscriptionplus", "destination": "https://subscriptionplusgame.com", "type": 301 },
-  { "source": "/subscriptionplus/:path*", "destination": "https://subscriptionplusgame.com/:path", "type": 301 }
-],
+      {
+        "source": "/subscriptionplus",
+        "destination": "https://subscriptionplusgame.com",
+        "type": 301
+      },
+      {
+        "source": "/subscriptionplus/:path*",
+        "destination": "https://subscriptionplusgame.com/:path",
+        "type": 301
+      },
+      {
+        "source": "/r/ceymer",
+        "destination": "https://ceymer-studios.com/local",
+        "type": 302
+      },
+      {
+        "source": "/r/:code",
+        "destination": "/local",
+        "type": 302
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
