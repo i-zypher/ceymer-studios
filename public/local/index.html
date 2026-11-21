@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ceymer Studios Local</title>
+<meta name="description" content="Tap-to-review cards, Google Business Profile tune-ups and websites, apps, tech support and training for businesses and people across Pittsburgh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a paper page with ink bands; the hero shows the product working (phone taps a card). Pittsburgh gold is the only accent. */
+:root{
+  --paper:#F2F1EC;
+  --paper-2:#E7E5DD;
+  --ink:#15181D;
+  --ink-soft:#4A4F57;
+  --gold:#D9A521;
+  --gold-deep:#8A6410;
+  --line:#D3D0C6;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-0.02em}
+p{margin:0}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{font-family:var(--display);font-weight:700;font-size:20px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand .dot{width:12px;height:12px;border-radius:50%;background:var(--gold)}
+.brand small{font-family:var(--body);font-weight:500;font-size:13px;color:var(--ink-soft)}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:15px;font-weight:500}
+.nav ul a{text-decoration:none;color:var(--ink-soft)}
+.nav ul a:hover{color:var(--ink)}
+@media (max-width:760px){.nav ul{display:none}}
+.brand,.nav .btn{white-space:nowrap}
+@media (max-width:420px){.brand small{display:none}.stand{width:200px;left:0}.phone{right:0;width:150px}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--ink);cursor:pointer;font-family:var(--body);transition:transform .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+
+/* hero */
+.hero{padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.kicker{font-size:14px;font-weight:600;color:var(--gold-deep);margin-bottom:18px}
+.hero h1{font-size:clamp(40px,6vw,68px)}
+.hero h1 em{font-style:normal;color:var(--gold-deep)}
+.hero .lede{margin-top:22px;font-size:19px;color:var(--ink-soft);max-width:34em}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero .note{margin-top:18px;font-size:14px;color:var(--ink-soft)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:40px}}
+
+/* tap demo */
+.demo{position:relative;height:420px;display:flex;align-items:center;justify-content:center}
+.stand{position:absolute;left:4%;bottom:30px;width:230px;height:300px;background:var(--ink);border-radius:18px;padding:26px 22px;color:var(--paper);display:flex;flex-direction:column;gap:14px;box-shadow:0 24px 40px -20px rgba(21,24,29,.55)}
+.stand .stars{color:var(--gold);font-size:22px;letter-spacing:3px}
+.stand h3{font-size:26px;color:var(--paper)}
+.stand .tapzone{margin-top:auto;display:flex;align-items:center;gap:14px}
+.nfc{width:54px;height:54px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;position:relative}
+.nfc::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--gold);animation:ping 2.4s ease-out infinite}
+.qr{width:58px;height:58px;background:var(--paper);border-radius:6px;padding:5px}
+.stand small{font-size:12px;color:#B9BCC2}
+.phone{position:absolute;right:4%;top:20px;width:170px;height:340px;background:#0E1014;border-radius:30px;padding:10px;box-shadow:0 30px 50px -24px rgba(21,24,29,.6);animation:tap 4.8s ease-in-out infinite}
+.screen{background:#fff;border-radius:22px;height:100%;padding:18px 14px;display:flex;flex-direction:column;gap:10px;font-size:11px;color:#333}
+.screen .gbar{height:8px;border-radius:4px;background:#E6E6E6}
+.screen .gname{font-weight:600;font-size:13px;color:#111}
+.screen .rate{display:flex;gap:3px;color:#C9CCD1;font-size:20px}
+.screen .rate span{animation:fill 4.8s ease-in-out infinite}
+.screen .rate span:nth-child(2){animation-delay:.08s}.screen .rate span:nth-child(3){animation-delay:.16s}.screen .rate span:nth-child(4){animation-delay:.24s}.screen .rate span:nth-child(5){animation-delay:.32s}
+.screen .box{flex:1;border:1px solid #E2E2E2;border-radius:10px;padding:8px;color:#888}
+.screen .post{align-self:flex-end;background:#1A73E8;color:#fff;border-radius:999px;padding:5px 12px;font-weight:600}
+@keyframes tap{0%,100%{transform:translate(0,0) rotate(0)}35%,60%{transform:translate(-86px,74px)}}
+@keyframes ping{0%{transform:scale(1);opacity:.9}80%,100%{transform:scale(1.7);opacity:0}}
+@keyframes fill{0%,45%{color:#C9CCD1}60%,92%{color:#F4B400}100%{color:#C9CCD1}}
+@media (max-width:860px){.demo{height:380px;max-width:440px;margin:0 auto;width:100%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* sections */
+section{padding:80px 0}
+.sec-head{max-width:640px;margin-bottom:40px}
+.sec-head h2{font-size:clamp(30px,4vw,44px)}
+.sec-head p{margin-top:14px;color:var(--ink-soft);font-size:18px}
+.band{background:var(--ink);color:var(--paper)}
+.band .sec-head p{color:#B9BCC2}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{border-top:2px solid var(--gold);padding-top:18px}
+.step .n{font-family:var(--display);font-size:15px;color:var(--gold);font-weight:700}
+.step h3{font-size:22px;margin:8px 0 8px;color:var(--paper)}
+.step p{color:#C4C7CC;font-size:16px}
+@media (max-width:760px){.steps{grid-template-columns:1fr}}
+
+/* pricing */
+.group{margin-top:48px}
+.group:first-of-type{margin-top:0}
+.group-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:20px}
+.group-title h3{font-size:24px}
+.group-title span{font-size:14px;color:var(--ink-soft)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cards.two{grid-template-columns:repeat(2,1fr)}
+@media (max-width:900px){.cards,.cards.two{grid-template-columns:1fr}}
+.card{background:#FBFAF7;border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.card.feature{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.card .tag{align-self:flex-start;font-size:12px;font-weight:600;background:var(--gold);color:var(--ink);padding:4px 10px;border-radius:999px}
+.card h4{font-family:var(--display);font-size:22px;margin:0;letter-spacing:-0.01em}
+.price{font-family:var(--display);font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.price small{font-family:var(--body);font-size:15px;font-weight:500;color:var(--ink-soft)}
+.card.feature .price small{color:#B9BCC2}
+.card p.desc{color:var(--ink-soft);font-size:16px}
+.card.feature p.desc{color:#C4C7CC}
+.card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:15px}
+.card li{padding-left:22px;position:relative}
+.card li::before{content:"";position:absolute;left:2px;top:9px;width:10px;height:6px;border-left:2px solid var(--gold-deep);border-bottom:2px solid var(--gold-deep);transform:rotate(-45deg)}
+.card.feature li::before{border-color:var(--gold)}
+.buys{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;padding-top:6px}
+.buy{justify-content:center;flex:1 1 auto}
+.card .addon{padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink-soft)}
+.card.feature .addon{border-color:#3A3F47;color:#B9BCC2}
+
+/* honest */
+.honest .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.rules{display:flex;flex-direction:column;gap:14px}
+.rule{background:#FBFAF7;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:16px 18px}
+.rule strong{display:block;font-family:var(--display);font-size:18px;margin-bottom:4px}
+.rule span{color:var(--ink-soft);font-size:15px}
+@media (max-width:860px){.honest .wrap{grid-template-columns:1fr}}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px}
+.about p{color:var(--ink-soft);margin-top:14px;max-width:36em}
+.work{display:grid;gap:14px}
+.work a{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 20px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:#FBFAF7}
+.work a:hover{border-color:var(--ink)}
+.work strong{font-family:var(--display);font-size:19px}
+.work span{color:var(--ink-soft);font-size:14px}
+.area{margin-top:26px;display:flex;flex-wrap:wrap;gap:8px}
+.area span{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:#FBFAF7}
+@media (max-width:860px){.about .wrap{grid-template-columns:1fr}}
+
+/* faq */
+.faq{display:grid;gap:10px;max-width:780px}
+details{border:1px solid var(--line);border-radius:12px;background:#FBFAF7;padding:4px 20px}
+summary{cursor:pointer;font-weight:600;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-family:var(--display);color:var(--gold-deep);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{padding:0 0 16px;color:var(--ink-soft)}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+form{display:grid;gap:14px}
+label{font-size:14px;font-weight:600}
+input,select,textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border-radius:10px;border:1px solid #3A3F47;background:#1E2229;color:var(--paper)}
+textarea{min-height:110px;resize:vertical}
+.field{display:grid;gap:6px}
+.contact-info{display:grid;gap:18px;align-content:start}
+.contact-info .big{font-family:var(--display);font-size:24px;word-break:break-all}
+.contact-info p{color:#C4C7CC}
+.copy{background:transparent;border:1px solid #3A3F47;color:var(--paper);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer}
+#status{min-height:1.5em;font-size:15px;color:var(--gold)}
+.draft{display:none;background:#1E2229;border:1px solid #3A3F47;border-radius:10px;padding:14px;font-size:14px;white-space:pre-wrap;color:#D6D8DC}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{padding:28px 0;border-top:1px solid #2A2E35;background:var(--ink);color:#9A9EA6;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>Ceymer Studios <small>Local</small></a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#contact" style="padding:9px 18px;font-size:15px">Book a visit</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="kicker">For Pittsburgh businesses and the people who run them</p>
+      <h1>Easy to find on Google. <em>Easy to review.</em></h1>
+      <p class="lede">I'm Corey, a software developer in Jefferson Hills. I set up tap-to-review cards, clean up Google Business Profiles, build websites and apps, and help with tech support and training. I come to you and do the work in person.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#contact">Book a free 15-minute visit</a>
+        <a class="btn btn-ghost" href="#pricing">See pricing</a>
+      </div>
+      <p class="note" style="margin-top:14px">Questions? Call or text <a href="tel:+18787871056" style="font-weight:600">(878) 787-1056</a></p>
+      <p class="note">Flat prices, no contracts. Buy online or book a visit first. Care plans are month to month.</p>
+    </div>
+
+    <div class="demo" aria-label="A customer taps their phone on a review stand and Google's review form opens">
+      <div class="stand">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <h3>Enjoyed your visit? Tell Google.</h3>
+        <small>Tap your phone here, or scan the code.</small>
+        <div class="tapzone">
+          <div class="nfc" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D9A521" stroke-width="2" stroke-linecap="round"><path d="M8.5 7.5a6 6 0 0 1 0 9"/><path d="M12 5a9.5 9.5 0 0 1 0 14"/><path d="M5 10a2.6 2.6 0 0 1 0 4"/></svg>
+          </div>
+          <svg class="qr" viewBox="0 0 21 21" aria-hidden="true" shape-rendering="crispEdges">
+            <g fill="#15181D">
+              <path d="M0 0h7v7H0zM1 1v5h5V1zM2 2h3v3H2z" fill-rule="evenodd"/>
+              <path d="M14 0h7v7h-7zM15 1v5h5V1zM16 2h3v3h-3z" fill-rule="evenodd"/>
+              <path d="M0 14h7v7H0zM1 15v5h5v-5zM2 16h3v3H2z" fill-rule="evenodd"/>
+              <path d="M8 0h1v1H8zM10 1h2v1h-2zM8 3h2v2H8zM11 4h1v3h-1zM9 6h1v1H9zM8 8h3v1H8zM12 8h2v2h-2zM15 8h1v1h-1zM17 8h4v1h-4zM0 8h2v1H0zM3 8h2v2H3zM6 9h1v2H6zM1 10h1v2H1zM8 10h1v3H8zM10 11h3v1h-3zM15 10h2v2h-2zM19 10h1v3h-1zM3 12h2v1H3zM12 13h1v2h-1zM14 12h1v3h-1zM16 13h2v1h-2zM9 14h2v1H9zM8 16h1v3H8zM10 16h2v2h-2zM13 16h3v1h-3zM17 15h1v2h-1zM19 15h2v1h-2zM14 18h2v2h-2zM18 18h1v3h-1zM10 19h3v1h-3zM20 19h1v2h-1z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="gbar" style="width:60%"></div>
+          <div class="gname">Your Business</div>
+          <div>Rate and review</div>
+          <div class="rate"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <div class="box">Share details of your own experience at this place</div>
+          <div class="post">Post</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How a tap card gets you more reviews</h2>
+      <p>Most happy customers would leave a review. They just never get around to searching for your listing. The card takes that step away.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h3>They tap or scan</h3><p>A customer holds their phone to the stand at your counter. Phones without NFC scan the QR code instead. No app needed.</p></div>
+      <div class="step"><div class="n">02</div><h3>Google's review form opens</h3><p>It goes straight to the star rating for your business, already signed in. Most reviews take under a minute.</p></div>
+      <div class="step"><div class="n">03</div><h3>You stay on top of them</h3><p>With a care plan I watch new reviews and draft replies for you to approve, so every customer hears back.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pricing</h2>
+      <p>Launch prices for Pittsburgh businesses. Every price includes my time on site. Buy online with any card, Apple Pay or Google Pay, and I'll reach out within one business day to schedule. Sales tax applies to the physical cards and stands.</p>
+    </div>
+
+    <div class="group">
+      <div class="group-title"><h3>Get found and reviewed</h3><span>One-time</span></div>
+      <div class="cards">
+        <article class="card">
+          <h4>Tap &amp; Review Kit</h4>
+          <div class="price">$129</div>
+          <p class="desc">Everything your counter needs to start asking every customer for a review.</p>
+          <ul>
+            <li>1 countertop stand with NFC and QR</li>
+            <li>5 tap cards for staff, invoices or the register</li>
+            <li>Programmed to your Google review link</li>
+            <li>A short review link for texts and receipts</li>
+            <li>A one-line script your staff can use</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/4gMeVe7258xK24MblP6Ri01" target="_blank" rel="noopener">Buy the kit</a></div><p class="addon">Add extra cards ($10) or stands ($39) at checkout.</p>
+        </article>
+        <article class="card feature">
+          <span class="tag">Most popular</span>
+          <h4>Get Found Bundle</h4>
+          <div class="price">$329 <small>save $49</small></div>
+          <p class="desc">The Profile Tune-Up and the Tap &amp; Review Kit together, done in one visit.</p>
+          <ul>
+            <li>Everything in the Profile Tune-Up</li>
+            <li>Everything in the Tap &amp; Review Kit</li>
+            <li>Check-in two weeks later to see how it's going</li>
+          </ul>
+          <div class="buys"><a class="btn btn-gold buy" href="https://buy.stripe.com/cNicN686915icJqgG96Ri02" target="_blank" rel="noopener">Buy the bundle</a></div><p class="addon">The best place to start for most businesses.</p>
+        </article>
+        <article class="card">
+          <h4>Google Profile Tune-Up</h4>
+          <div class="price">$249</div>
+          <p class="desc">Your Google listing is often the first thing people see. I make sure it's complete and correct.</p>
+          <ul>
+            <li>Claim or verify your profile</li>
+            <li>Categories, services, hours and holiday hours</li>
+            <li>A written business description</li>
+            <li>10–15 fresh photos taken on site</li>
+            <li>Name, address and phone matched everywhere they appear</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/eVq3cw7257tGaBifC56Ri03" target="_blank" rel="noopener">Buy the tune-up</a></div><p class="addon">You keep ownership. I'm added as a manager.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-title"><h3>Websites and apps</h3><span>One-time build, you own it</span></div>
+      <div class="cards">
+        <article class="card">
+          <h4>Starter Site</h4>
+          <div class="price">$799</div>
+          <p class="desc">One fast, polished page that tells people what you do and gets them to call.</p>
+          <ul>
+            <li>Mobile-first single page</li>
+            <li>Tap-to-call, directions and hours</li>
+            <li>Your services and a photo gallery</li>
+            <li>Contact form that lands in your inbox</li>
+            <li>Connected to your domain and Google profile</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/4gM7sM1HLaFSaBiey16Ri04" target="_blank" rel="noopener">Pay $400 deposit</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/dRm8wQ86929m6l24Xr6Ri05" target="_blank" rel="noopener">Pay $799 in full</a></div><p class="addon">Ready in about a week once I have your photos and info. Deposit balance is invoiced at launch.</p>
+        </article>
+        <article class="card">
+          <h4>Business Site</h4>
+          <div class="price">$1,499</div>
+          <p class="desc">Room for everything: separate service pages, a menu or price list, and booking.</p>
+          <ul>
+            <li>Up to 5 pages</li>
+            <li>Online booking, menu or quote request</li>
+            <li>Basic search setup for each page</li>
+            <li>Training so you can make small edits</li>
+            <li>Everything in the Starter Site</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/fZu00k8695ly7p6fC56Ri06" target="_blank" rel="noopener">Pay $750 deposit</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/eVqfZiaeh3dq5gY2Pj6Ri07" target="_blank" rel="noopener">Pay $1,499 in full</a></div><p class="addon">Domain registration is billed at cost, usually $12–20 a year. Deposit balance is invoiced at launch.</p>
+        </article>
+        <article class="card">
+          <h4>Custom App</h4>
+          <div class="price" style="font-size:30px">Quoted per project</div>
+          <p class="desc">An iPhone and Android app for your customers or your crew: booking, loyalty, job tracking, whatever your business runs on.</p>
+          <ul>
+            <li>Built and shipped by the developer of ADIN and Scapeboard</li>
+            <li>App Store and Google Play publishing handled</li>
+            <li>Fixed quote after a free planning call</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="tel:+18787871056">Call (878) 787-1056</a><a class="btn btn-ghost buy" href="#contact">Book a visit</a></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-title"><h3>Tech support and training</h3><span>Hourly, one-hour minimum</span></div>
+      <div class="cards two">
+        <article class="card">
+          <h4>Tech Support</h4>
+          <div class="price">$60<small>/hour</small></div>
+          <p class="desc">Help at your home or business with the tech that's getting in your way.</p>
+          <ul>
+            <li>Phones, tablets and computers</li>
+            <li>Wi-Fi, printers and smart TVs</li>
+            <li>Email, passwords and account recovery</li>
+            <li>Spotting scams and cleaning up a slow device</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/5kQ9AU0DHaFS10I9dH6Ri0a" target="_blank" rel="noopener">Book tech support</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/7sYfZicmp01e10IahL6Ri0c" target="_blank" rel="noopener">Senior rate: $30 first hour</a></div>
+          <p class="addon">Pay for the hours you expect. If it takes less time, I refund the difference.</p>
+        </article>
+        <article class="card">
+          <h4>Training</h4>
+          <div class="price">$75<small>/hour</small></div>
+          <p class="desc">One-on-one lessons at your pace, for you or your staff. Nobody gets rushed.</p>
+          <ul>
+            <li>Getting comfortable with a new phone or computer</li>
+            <li>Google tools: Gmail, Calendar, Maps, Photos</li>
+            <li>Running your own website and Google profile</li>
+            <li>Written notes to keep after every session</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/9B6eVe3PTaFS6l24Xr6Ri0b" target="_blank" rel="noopener">Book training</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/00w00k2LPg0c7p6fC56Ri0d" target="_blank" rel="noopener">Senior rate: $37.50 first hour</a></div>
+          <p class="addon">Seniors 65 and older get 50% off the first hour of tech support or training.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-title"><h3>Ongoing care</h3><span>Monthly, cancel anytime</span></div>
+      <div class="cards two">
+        <article class="card">
+          <h4>Care</h4>
+          <div class="price">$49<small>/month</small></div>
+          <p class="desc">Hosting and upkeep so your site and listing stay current.</p>
+          <ul>
+            <li>Website hosting and security updates</li>
+            <li>Small text and photo changes</li>
+            <li>New reviews watched, with reply drafts for you to approve</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/14AeVe1HLaFS4cU3Tn6Ri08" target="_blank" rel="noopener">Start Care</a></div>
+        </article>
+        <article class="card">
+          <h4>Care Plus</h4>
+          <div class="price">$99<small>/month</small></div>
+          <p class="desc">For businesses that want their Google profile active every month.</p>
+          <ul>
+            <li>Everything in Care</li>
+            <li>Two Google profile posts a month</li>
+            <li>A short monthly report: calls, direction requests, reviews</li>
+          </ul>
+          <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/28E14odqteW85gYahL6Ri09" target="_blank" rel="noopener">Start Care Plus</a></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="honest" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head" style="margin:0">
+      <h2>Reviews done the right way</h2>
+      <p>Google removes reviews and can restrict listings that break its rules, and the FTC now fines businesses for fake or bought reviews. Everything I set up follows the rules, so the reviews you get are yours to keep.</p>
+    </div>
+    <div class="rules">
+      <div class="rule"><strong>Every customer gets the same ask</strong><span>The card goes to everyone. No filtering out unhappy customers before they reach Google.</span></div>
+      <div class="rule"><strong>No discounts or freebies for reviews</strong><span>Google bans rewards for reviews, even small ones, and that includes asking for five stars.</span></div>
+      <div class="rule"><strong>Reply to the bad ones too</strong><span>A calm, quick reply to a rough review often does more for you than another five-star one.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div>
+      <h2 style="font-size:clamp(30px,4vw,44px)">A local developer, not a call center</h2>
+      <p>I run Ceymer Studios, a Pennsylvania software studio based in Jefferson Hills. I build and ship real apps on the App Store and Google Play, and I've spent years in retail helping people in person with their phones.</p>
+      <p>That's this service: real technical work, explained in plain language, by someone who shows up at your door.</p>
+      <div class="area" aria-label="Service area">
+        <span>All of Pittsburgh</span><span>South Hills</span><span>North Hills</span><span>East End</span><span>West End</span><span>Mon Valley</span><span>Downtown</span><span>Allegheny County</span>
+      </div>
+    </div>
+    <div class="work">
+      <a href="https://ceymer-studios.com"><div><strong>ADIN</strong><br><span>Tech-literacy tutor app, live on the App Store</span></div><span aria-hidden="true">→</span></a>
+      <a href="https://ceymer-studios.com"><div><strong>Scapeboard</strong><br><span>Business management app for landscapers</span></div><span aria-hidden="true">→</span></a>
+      <a href="https://ceymer-studios.com"><div><strong>ceymer-studios.com</strong><br><span>See the rest of my work</span></div><span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head"><h2>Questions</h2></div>
+    <div class="faq">
+      <details><summary>Do my customers need an app?</summary><p>No. iPhones from the XS onward and most Android phones open the review page with a tap. Any phone with a camera can scan the QR code.</p></details>
+      <details><summary>Do I have to give you my Google password?</summary><p>No. You add me as a manager on your Business Profile, and you can remove me at any time. You always stay the owner.</p></details>
+      <details><summary>What if I already have a website?</summary><p>Start with the Get Found Bundle. If your site needs work I'll tell you honestly what's worth fixing and what isn't.</p></details>
+      <details><summary>Can the cards point somewhere else later?</summary><p>Yes. The cards point to a short link I manage for you, so if your review page or business name changes, the cards keep working.</p></details>
+      <details><summary>Who gets the senior rate?</summary><p>Anyone 65 or older gets 50% off their first hour of tech support or training. After that it's the regular hourly rate.</p></details>
+      <details><summary>How do I pay?</summary><p>Buy anything on this page online with a card, Apple Pay or Google Pay through secure Stripe checkout. Websites can be paid in full or with a deposit, with the balance invoiced at launch. In person I also take Cash App for Business ($CeymerStudios) or check.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band contact" id="contact">
+  <div class="wrap">
+    <div>
+      <div class="sec-head" style="margin-bottom:24px">
+        <h2>Book a free 15-minute visit</h2>
+        <p>I'll stop by anywhere in the Pittsburgh area, look at your Google listing and website with you, and tell you what would help. No pressure to buy anything.</p>
+      </div>
+      <form id="visit" novalidate>
+        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="f-biz">Business name and town</label><input id="f-biz" name="business" required></div>
+        <div class="field"><label for="f-contact">Phone or email</label><input id="f-contact" name="contact" required></div>
+        <div class="field"><label for="f-interest">Interested in</label>
+          <select id="f-interest" name="interest">
+            <option>Get Found Bundle</option>
+            <option>Tap &amp; Review Kit</option>
+            <option>Google Profile Tune-Up</option>
+            <option>A website</option>
+            <option>An app</option>
+            <option>Tech support</option>
+            <option>Training</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-msg">Anything else?</label><textarea id="f-msg" name="message"></textarea></div>
+        <div><button class="btn btn-gold" type="submit">Write my email</button></div>
+        <p id="status" role="status"></p>
+        <div class="draft" id="draft"></div>
+      </form>
+    </div>
+    <div class="contact-info">
+      <p>Rather call or text?</p>
+      <a class="big" href="tel:+18787871056" style="text-decoration:none">(878) 787-1056</a>
+      <p>Prefer email?</p>
+      <div class="big">corey@ceymer-studios.com</div>
+      <div><button class="copy" type="button" id="copyEmail">Copy email address</button></div>
+      <p>Ceymer Studios LLC<br>Jefferson Hills, Pennsylvania</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Ceymer Studios LLC · Jefferson Hills, PA · <a href="tel:+18787871056">(878) 787-1056</a></span>
+    <span>Google and Google Business Profile are trademarks of Google LLC. Ceymer Studios is not affiliated with Google.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var EMAIL = "corey@ceymer-studios.com";
+  var form = document.getElementById("visit");
+  var status = document.getElementById("status");
+  var draft = document.getElementById("draft");
+
+  function copy(text, okMsg){
+    if (!navigator.clipboard) { status.textContent = "Copy isn't available here. Select the text to copy it."; return; }
+    navigator.clipboard.writeText(text).then(function(){ status.textContent = okMsg; })
+      .catch(function(){ status.textContent = "Copy was blocked. Select the text to copy it."; });
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var d = new FormData(form);
+    var name = (d.get("name")||"").trim(), biz = (d.get("business")||"").trim(), contact = (d.get("contact")||"").trim();
+    if (!name || !biz || !contact) { status.textContent = "Add your name, business and a phone or email so I can reach you."; return; }
+    var subject = "Visit request: " + biz;
+    var body = "Hi Corey,\n\nI'd like to book a free visit.\n\nName: " + name + "\nBusiness: " + biz + "\nReach me at: " + contact + "\nInterested in: " + d.get("interest") + (d.get("message") ? "\n\n" + d.get("message").trim() : "") + "\n";
+    draft.style.display = "block";
+    draft.textContent = "To: " + EMAIL + "\nSubject: " + subject + "\n\n" + body;
+    status.textContent = "Your email is ready below. Opening your mail app. If nothing opens, copy it and send it to " + EMAIL + ".";
+    window.location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  });
+
+  document.getElementById("copyEmail").addEventListener("click", function(){ copy(EMAIL, "Email address copied."); });
+})();
+</script>
+</body>
+</html>
