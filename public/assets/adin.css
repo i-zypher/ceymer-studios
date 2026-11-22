@@ -127,3 +127,5 @@
 #adin-chat .msg.me { color: var(--ink); }
 #adin-char { width: 64px; height: 136px; }
 #adin-chat, #adin-bubble { font-family: var(--f-body); }
+
+#adin-bubble { translate: none; transition: opacity 0.25s; }

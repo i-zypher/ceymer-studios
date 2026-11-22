@@ -66,8 +66,7 @@ a { color: inherit; }
 /* ---------- header ---------- */
 .site-head {
   position: sticky; top: 0; z-index: 60;
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
-  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
   border-bottom: 1px solid var(--line-soft);
 }
 .site-head .wrap {
@@ -599,3 +598,6 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 @view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.18s; }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* ADIN bubble: fade only (no movement) to keep repaints small */
+#adin-bubble { translate: none; transition: opacity 0.25s; }
