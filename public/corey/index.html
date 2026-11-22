@@ -11,7 +11,7 @@
 <meta name="color-scheme" content="dark" />
 <style>html{background:#0F1114}</style>
 <script>try{if(sessionStorage.getItem('cs-intro'))document.documentElement.classList.add('no-intro');sessionStorage.setItem('cs-intro','1')}catch(e){}</script>
-<link rel="stylesheet" href="/assets/ceymer.css?v=15" />
+<link rel="stylesheet" href="/assets/ceymer.css?v=16" />
 </head>
 <body data-adin-page="home">
 
@@ -60,7 +60,14 @@
         </div>
       </div>
       <div class="d-player">
-        <iframe title="Nate Miller on Spotify" src="https://open.spotify.com/embed/artist/3StINpZ0HpeQJik1AGQbdO?theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <button type="button" class="d-player-load" data-src="https://open.spotify.com/embed/artist/3StINpZ0HpeQJik1AGQbdO?theme=0&amp;autoplay=1">
+          <span class="play" aria-hidden="true">▶</span>
+          <strong>Play Nate Miller on Spotify</strong>
+          <span>The player loads when you press play.</span>
+        </button>
+        <script>
+          (function(){var b=document.querySelector('.d-player-load');if(!b)return;b.addEventListener('click',function(){var f=document.createElement('iframe');f.title='Nate Miller on Spotify';f.src=b.getAttribute('data-src');f.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';b.replaceWith(f);});})();
+        </script>
       </div>
     </div>
     <div class="d-releases">
