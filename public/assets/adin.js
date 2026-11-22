@@ -321,14 +321,25 @@
 
   updateBounce();
 
-  /* greet once per session — with the real wave */
-  if (!sessionStorage.getItem('adin-greeted')) {
-    sessionStorage.setItem('adin-greeted', '1');
-    setTimeout(() => {
+  /* greet on every page load, then offer help if they haven't opened chat */
+  const path = location.pathname;
+  const greeting = path.startsWith('/local')
+    ? "Hi! I'm ADIN. Not sure which service you need? Click me and I'll help you pick."
+    : path.startsWith('/corey')
+    ? "Hi! I'm ADIN. Want to know more about Corey or hire him? Click me."
+    : "Hi! I'm ADIN. Need a website, an app or tech help? Click me and ask.";
+  const firstVisit = !sessionStorage.getItem('adin-greeted');
+  sessionStorage.setItem('adin-greeted', '1');
+  setTimeout(() => {
+    if (firstVisit) wave();
+    say(greeting, 7000);
+  }, 1200);
+  setTimeout(() => {
+    if (!chat.classList.contains('open')) {
       wave();
-      say("Hi! I'm ADIN. Click me if you have questions about Corey's services or work.", 6500);
-    }, 1200);
-  }
+      say("Still looking around? I can quote prices or set up a free visit. Just click me.", 7000);
+    }
+  }, 25000);
 
   /* ---------- scroll commentary via [data-adin] ---------- */
   const seen = new Set();
