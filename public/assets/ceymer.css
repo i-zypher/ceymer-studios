@@ -3,7 +3,6 @@
    Dark, alive. Real imagery, motion, optional sound.
    ========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   /* palette */
@@ -595,3 +594,8 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 .d-player-load:hover { border-color: #E9B23A; }
 .d-player-load .play { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #E9B23A; color: #14110A; font-size: 1.5rem; padding-left: 4px; }
 .d-player-load strong { font-family: var(--f-display); font-size: 1.3rem; color: var(--ink); }
+
+/* smooth page-to-page navigation: keep the old page on screen and crossfade, instead of a blank frame */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.18s; }
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
