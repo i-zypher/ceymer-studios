@@ -577,3 +577,6 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
   box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px #3A3E45;
 }
 .d-hero-phone .cap { flex-direction: column; align-items: center; text-align: center; gap: 0.15rem; }
+
+/* about section: studio logo in place of the portrait */
+.d-about img.d-about-logo { aspect-ratio: 1 / 1; object-fit: contain; padding: 2.5rem; background: #08090B; border: 1px solid #2C3037; }
