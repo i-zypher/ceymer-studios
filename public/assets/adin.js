@@ -21,32 +21,32 @@
   /* ---------- scripted dialogue ---------- */
   const SCRIPT = {
     start: {
-      text: "Hi, I'm ADIN! I help people learn technology in Corey's apps, and here I help you figure out what Ceymer Studios can do for you. What would you like to know?",
+      text: "Hi, I'm ADIN! I'm the tutor from Ceymer Studios' app, and here I help you figure out what the studio can do for you. What would you like to know?",
       chips: ['services', 'prices', 'who', 'apps', 'contact']
     },
     services: {
-      label: "What can Corey do for me?",
-      text: "For businesses: websites, custom apps, and getting found and reviewed on Google with a profile tune-up and tap-to-review stickers. For homes and businesses: tech support, smart home setup and one-on-one training. Corey comes to you anywhere in the Pittsburgh area, and every price is flat. Tell me what you're trying to fix and I'll point you to the right one!",
+      label: "What can you do for me?",
+      text: "For businesses: websites, custom apps, and getting found and reviewed on Google with a profile tune-up, tap-to-review kits and counter cards. For homes and businesses: tech support, smart home setup and one-on-one training. Ceymer Studios comes to you anywhere in the Pittsburgh area, and every price is flat. Tell me what you're trying to fix and I'll point you to the right one!",
       chips: ['prices', 'visit', 'apps']
     },
     prices: {
       label: "How much does it cost?",
-      text: "Websites start at $799, and a 5-page site is $1,499. Tech support is $60 an hour, training is $75, and seniors get half off the first hour. Smart home setup is $149 for up to 4 devices. The Get Found Bundle, a Google profile tune-up plus review stickers, is $329. Custom apps are quoted per project. Everything's on the Services page with buy buttons.",
+      text: "Websites start at $799, and a 5-page site is $1,499. The Tap & Review Kit is $129, counter cards are $50 or 2 for $90, and the Get Found Bundle with a Google profile tune-up is $329. Tech support is $60 an hour, training is $75, and seniors get half off the first hour. Smart home setup is $149 for up to 4 devices. Custom apps are quoted per project. Everything's on the Services page with buy buttons.",
       chips: ['visit', 'services', 'contact']
     },
     visit: {
-      label: "Can he come look first?",
-      text: "Yes! Corey offers a free 15-minute visit. He'll stop by, look at your Google listing and website with you, and tell you honestly what would help. No pressure to buy anything. Book it on the Services page, or call or text (878) 787-1056.",
+      label: "Can you come look first?",
+      text: "Yes! Ceymer Studios offers a free 15-minute visit. We'll stop by, look at your Google listing and website with you, and tell you honestly what would help. No pressure to buy anything. Book it on the Services page, or call or text (878) 787-1056.",
       chips: ['prices', 'who', 'contact']
     },
     who: {
-      label: "Who is Corey?",
-      text: "Corey Miller is a self-taught developer and the founder of Ceymer Studios LLC in Jefferson Hills, Pennsylvania. He started building apps on a tablet with AI-assisted tools and now ships cross-platform apps on real infrastructure — Firebase, Cloud Run, Capacitor. He holds the Google UX Design Professional Certificate (I'm the capstone!) and IBM's iOS & Android Mobile App Developer certificate, and he's now working on IBM's Generative AI Engineering certificate.",
+      label: "Who's behind the studio?",
+      text: "Ceymer Studios is led by founder and lead developer Corey Miller, a self-taught developer in Jefferson Hills, Pennsylvania. He started building apps on a tablet with AI-assisted tools and now ships cross-platform apps on Firebase, Cloud Run and Capacitor. He holds the Google UX Design Professional Certificate (I'm the capstone!) and IBM's iOS & Android Mobile App Developer certificate, and he's working on IBM's Generative AI Engineering certificate.",
       chips: ['apps', 'process', 'contact']
     },
     apps: {
       label: "Show me the apps",
-      text: "Corey's apps are live on the App Store and Google Play. Scapeboard runs landscaping businesses: estimates, invoices, clients and AI plant identification. I'm ADIN, a tech tutor for older adults with a practice phone they can't break. And Subscription Plus is a parody game about a subscription you can't cancel. His side projects and his book Hum City, written with John Vogel, are on his profile page. Tap any card for the full story.",
+      text: "Ceymer Studios' apps are live on the App Store and Google Play. Scapeboard runs landscaping businesses: estimates, invoices, clients and AI plant identification. I'm ADIN, a tech tutor for older adults with a practice phone they can't break. And Subscription Plus is a parody game about a subscription you can't cancel. Tap any card on the home page for the full story.",
       chips: ['subplus', 'trading', 'humcity']
     },
     subplus: {
@@ -61,7 +61,7 @@
     },
     trading: {
       label: "The trading app?",
-      text: "Ceymer Trading is Corey's personal engineering lab: an algorithmic trading terminal on Firebase Cloud Functions with the Alpaca API for market access, and Claude Haiku as an AI analyst that must write out its reasoning before anything trades. Hard-coded guardrails sit between the AI and the order button — the AI proposes, the rules dispose. It's private, and it's absolutely not financial advice!",
+      text: "Ceymer Trading is the studio's private engineering lab: an algorithmic trading terminal on Firebase Cloud Functions with the Alpaca API for market access, and Claude Haiku as an AI analyst that must write out its reasoning before anything trades. Hard-coded guardrails sit between the AI and the order button. It's private, and it's absolutely not financial advice!",
       chips: ['apps', 'process', 'contact']
     },
     war: {
@@ -75,13 +75,13 @@
       chips: ['apps', 'who', 'contact']
     },
     process: {
-      label: "How does he work?",
-      text: "One loop, every project: research → design → test → iterate. He learned it formally in the Google UX cert and applies it to everything — my welcome screen exists because usability testing showed people froze at the old one. Under the hood it's React + Capacitor + Firebase + Cloud Run, shipped by one person.",
+      label: "How do you work?",
+      text: "One loop, every project: research, design, test, iterate. The studio applies it to everything. My own welcome screen exists because usability testing showed people froze at the old one. You get a clear quote up front, plain-language updates, and a team that shows up in person.",
       chips: ['services', 'apps', 'contact']
     },
     contact: {
-      label: "How do I reach him?",
-      text: "Call or text (878) 787-1056, or email corey@ceymer-studios.com. He gets back within one business day. To book a visit or buy a service, use the Services page. And if you're hiring for UX, customer success or AI quality roles, definitely say hi.",
+      label: "How do I reach you?",
+      text: "Call or text (878) 787-1056, or email corey@ceymer-studios.com. We get back within one business day. To book a visit or buy a service, use the Services page. And if you're hiring for UX, customer success or AI quality roles, definitely say hi.",
       chips: ['who', 'apps']
     }
   };
@@ -204,7 +204,7 @@
     </div>
     <div id="adin-log"></div>
     <form id="adin-form">
-      <input id="adin-input" type="text" placeholder="Ask about Corey's work…" autocomplete="off" />
+      <input id="adin-input" type="text" placeholder="Ask about our services…" autocomplete="off" />
       <button id="adin-send" type="submit">Send</button>
     </form>
     <div class="chat-note">Chats are logged to help improve ADIN.</div>`;
