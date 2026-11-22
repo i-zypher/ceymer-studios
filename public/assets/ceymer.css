@@ -567,3 +567,13 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 
 /* v5: only play the hero entrance on the first page of a visit (no flash on reload) */
 .no-intro .d-rise { animation: none; }
+
+/* hero: show the Scapeboard screenshot as a phone, centered, instead of a landscape crop */
+.d-hero-phone .float { align-items: center; }
+.d-hero-phone .glow { inset: 4% 10%; }
+.d-hero-phone img {
+  width: min(320px, 78%); aspect-ratio: 9 / 16; object-fit: cover; object-position: top center;
+  border-radius: 38px; border: 8px solid #23262C;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px #3A3E45;
+}
+.d-hero-phone .cap { flex-direction: column; align-items: center; text-align: center; gap: 0.15rem; }
