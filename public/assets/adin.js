@@ -40,8 +40,8 @@
       chips: ['prices', 'who', 'contact']
     },
     who: {
-      label: "Who's behind the studio?",
-      text: "Ceymer Studios is led by founder and lead developer Corey Miller, a self-taught developer in Jefferson Hills, Pennsylvania. He started building apps on a tablet with AI-assisted tools and now ships cross-platform apps on Firebase, Cloud Run and Capacitor. He holds the Google UX Design Professional Certificate (I'm the capstone!) and IBM's iOS & Android Mobile App Developer certificate, and he's working on IBM's Generative AI Engineering certificate.",
+      label: "Who's on the team?",
+      text: "Ceymer Studios is led by founder and lead developer Corey Miller, a self-taught developer in Jefferson Hills, Pennsylvania. He started building apps on a tablet with AI-assisted tools and now ships cross-platform apps on Firebase, Cloud Run and Capacitor. He holds the Google UX Design Professional Certificate (I'm the capstone!) and IBM's iOS & Android Mobile App Developer certificate, and he's working on IBM's Generative AI Engineering certificate. Jesse Profota is the project manager and sales rep: straight-talking, with a background in distribution and product testing.",
       chips: ['apps', 'process', 'contact']
     },
     apps: {

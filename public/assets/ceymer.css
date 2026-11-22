@@ -580,3 +580,12 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 
 /* about section: studio logo in place of the portrait */
 .d-about img.d-about-logo { aspect-ratio: 1 / 1; object-fit: contain; padding: 2.5rem; background: #08090B; border: 1px solid #2C3037; }
+
+/* meet the company: team cards */
+.d-team { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1rem; }
+.d-team-card { display: flex; flex-direction: column; gap: 0.4rem; padding: 1.25rem 1.35rem; background: var(--card); border: 1px solid #2C3037; border-radius: 14px; text-decoration: none; color: var(--ink-dim); transition: border-color 0.3s, transform 0.3s; }
+.d-team-card:hover { border-color: #E9B23A; transform: translateY(-3px); }
+.d-team-card .role { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: #E9B23A; }
+.d-team-card strong { font-family: var(--f-display); font-size: 1.35rem; font-weight: 600; color: var(--ink); }
+.d-team-card .go { margin-top: auto; padding-top: 0.4rem; color: #E9B23A; font-weight: 500; }
+.d-about-copy a.d-team-card { align-self: stretch; padding: 1.25rem 1.35rem; color: var(--ink-dim); font-weight: 400; }
