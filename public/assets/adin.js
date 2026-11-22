@@ -21,8 +21,23 @@
   /* ---------- scripted dialogue ---------- */
   const SCRIPT = {
     start: {
-      text: "Hi, I'm ADIN! I help people learn technology in Corey's apps — and here, I answer questions about his work. What would you like to know?",
-      chips: ['who', 'apps', 'subplus', 'humcity', 'contact']
+      text: "Hi, I'm ADIN! I help people learn technology in Corey's apps, and here I help you figure out what Ceymer Studios can do for you. What would you like to know?",
+      chips: ['services', 'prices', 'who', 'apps', 'contact']
+    },
+    services: {
+      label: "What can Corey do for me?",
+      text: "For businesses: websites, custom apps, and getting found and reviewed on Google with a profile tune-up and tap-to-review stickers. For homes and businesses: tech support, smart home setup and one-on-one training. Corey comes to you anywhere in the Pittsburgh area, and every price is flat. Tell me what you're trying to fix and I'll point you to the right one!",
+      chips: ['prices', 'visit', 'apps']
+    },
+    prices: {
+      label: "How much does it cost?",
+      text: "Websites start at $799, and a 5-page site is $1,499. Tech support is $60 an hour, training is $75, and seniors get half off the first hour. Smart home setup is $149 for up to 4 devices. The Get Found Bundle, a Google profile tune-up plus review stickers, is $329. Custom apps are quoted per project. Everything's on the Services page with buy buttons.",
+      chips: ['visit', 'services', 'contact']
+    },
+    visit: {
+      label: "Can he come look first?",
+      text: "Yes! Corey offers a free 15-minute visit. He'll stop by, look at your Google listing and website with you, and tell you honestly what would help. No pressure to buy anything. Book it on the Services page, or call or text (878) 787-1056.",
+      chips: ['prices', 'who', 'contact']
     },
     who: {
       label: "Who is Corey?",
@@ -31,7 +46,7 @@
     },
     apps: {
       label: "Show me the apps",
-      text: "The newest is Subscription Plus, a parody game about a subscription you can't cancel. It's live on the web and on Google Play. Two more are live on both app stores: me, ADIN, a tech tutor for older adults with a safe practice phone, and Scapeboard, a business manager for landscapers. There's also Your Leader, a civic-engagement app, Ceymer Trading, a trading lab with an AI decision layer, and Hum City, a cyberpunk book Corey writes with John Vogel. Tap any card to read the full story.",
+      text: "Corey's apps are live on the App Store and Google Play. Scapeboard runs landscaping businesses: estimates, invoices, clients and AI plant identification. I'm ADIN, a tech tutor for older adults with a practice phone they can't break. And Subscription Plus is a parody game about a subscription you can't cancel. His side projects and his book Hum City, written with John Vogel, are on his profile page. Tap any card for the full story.",
       chips: ['subplus', 'trading', 'humcity']
     },
     subplus: {
@@ -62,11 +77,11 @@
     process: {
       label: "How does he work?",
       text: "One loop, every project: research → design → test → iterate. He learned it formally in the Google UX cert and applies it to everything — my welcome screen exists because usability testing showed people froze at the old one. Under the hood it's React + Capacitor + Firebase + Cloud Run, shipped by one person.",
-      chips: ['war', 'apps', 'contact']
+      chips: ['services', 'apps', 'contact']
     },
     contact: {
       label: "How do I reach him?",
-      text: "Email corey@ceymer-studios.com — he reads everything. If you're hiring for UX, customer success, or AI quality roles, definitely say hi.",
+      text: "Call or text (878) 787-1056, or email corey@ceymer-studios.com. He gets back within one business day. To book a visit or buy a service, use the Services page. And if you're hiring for UX, customer success or AI quality roles, definitely say hi.",
       chips: ['who', 'apps']
     }
   };
@@ -311,7 +326,7 @@
     sessionStorage.setItem('adin-greeted', '1');
     setTimeout(() => {
       wave();
-      say("Hi! I'm ADIN. Click me if you have questions — I know everything about this studio.", 6500);
+      say("Hi! I'm ADIN. Click me if you have questions about Corey's services or work.", 6500);
     }, 1200);
   }
 
