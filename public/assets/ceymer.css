@@ -532,3 +532,35 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 .d-read-body hr { border: 0; height: 1px; width: 4rem; background: var(--line); margin: 2.8rem 0; }
 .d-read-foot { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 3.5rem; padding-top: 2rem; border-top: 1px solid var(--line-soft); }
 .d-read-foot .btn { min-height: 48px; padding: 0 1.4rem; }
+
+/* ==========================================================
+   v4 — business home page: services, why, contact
+   ========================================================== */
+.d-note { font-size: 0.95rem !important; color: var(--ink-faint) !important; }
+.d-note a { color: #E9B23A; font-weight: 500; }
+
+.d-svc { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 1.25rem; }
+.d-svc-item { display: flex; flex-direction: column; gap: 0.55rem; padding: 1.6rem 1.6rem 1.7rem; background: var(--card); border: 1px solid #2C3037; border-radius: 16px; text-decoration: none; color: var(--ink);
+  transition: transform 0.35s cubic-bezier(.2,.7,.2,1), border-color 0.35s, box-shadow 0.35s; }
+.d-svc-item:hover { transform: translateY(-4px); border-color: #E9B23A; box-shadow: 0 14px 40px rgba(233,178,58,0.12); }
+.d-svc-item .price { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #E9B23A; }
+.d-svc-item h3 { font-family: var(--f-display); font-size: 1.45rem; font-weight: 600; letter-spacing: -0.01em; }
+.d-svc-item p { color: var(--ink-dim); font-size: 1rem; }
+
+.d-why { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 1.5rem 2.5rem; }
+.d-why > div { border-top: 2px solid #E9B23A; padding-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.d-why h3 { font-family: var(--f-display); font-size: 1.35rem; font-weight: 600; }
+.d-why p { color: var(--ink-dim); }
+
+.d-contact { padding-bottom: clamp(4rem, 8vw, 6rem); }
+.d-contact-box { background: #1C1F25; border: 1px solid #3A3E45; border-radius: 20px; padding: clamp(1.8rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: 2rem 4rem; align-items: center; }
+.d-contact-box > div:first-child { flex: 1 1 360px; display: flex; flex-direction: column; gap: 0.9rem; }
+.d-contact-box p { color: var(--ink-dim); font-size: 1.1rem; max-width: 34rem; }
+.d-contact-ways { flex: 1 1 320px; display: flex; flex-direction: column; gap: 0.9rem; align-items: flex-start; }
+.d-contact-ways .btn { min-height: 52px; padding: 0 1.7rem; }
+.d-way { display: flex; flex-direction: column; text-decoration: none; color: var(--ink); font-size: 1.15rem; font-weight: 500; }
+.d-way span { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+.d-way:hover { color: #E9B23A; }
+.site-foot a { color: inherit; }
+.site-foot a:hover { color: #E9B23A; }
+@media (prefers-reduced-motion: reduce) { .d-svc-item { transition: none; } }
