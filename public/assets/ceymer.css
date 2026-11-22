@@ -564,3 +564,6 @@ figcaption, footer.site-foot .wrap { font-size: 0.85rem; }
 .site-foot a { color: inherit; }
 .site-foot a:hover { color: #E9B23A; }
 @media (prefers-reduced-motion: reduce) { .d-svc-item { transition: none; } }
+
+/* v5: only play the hero entrance on the first page of a visit (no flash on reload) */
+.no-intro .d-rise { animation: none; }
