@@ -125,7 +125,7 @@ section{padding:80px 0}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .cards.two{grid-template-columns:repeat(2,1fr)}
 @media (max-width:900px){.cards,.cards.two{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.card{scroll-margin-top:90px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:14px}
 .card.feature{background:#1F1B12;color:var(--ink);border-color:var(--gold)}
 .card .tag{align-self:flex-start;font-size:12px;font-weight:600;background:var(--gold);color:#14110A;padding:4px 10px;border-radius:999px}
 .card h4{font-family:var(--display);font-size:22px;margin:0;letter-spacing:-0.01em}
@@ -269,7 +269,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="group">
       <div class="group-title"><h3>Get found and reviewed</h3><span>One-time</span></div>
       <div class="cards two">
-        <article class="card">
+        <article id="tap-review-kit" class="card">
           <h4>Tap &amp; Review Kit</h4>
           <div class="price">$129</div>
           <p class="desc">Everything your counter needs to start asking every customer for a review.</p>
@@ -283,7 +283,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/4gMeVe7258xK24MblP6Ri01" target="_blank" rel="noopener">Buy the kit</a></div><p class="addon">Need more staff cards? Add them for $10 each at checkout.</p>
         </article>
-        <article class="card feature">
+        <article id="get-found-bundle" class="card feature">
           <span class="tag">Most popular</span>
           <h4>Get Found Bundle</h4>
           <div class="price">$329 <small>save $49</small></div>
@@ -296,7 +296,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-gold buy" href="https://buy.stripe.com/cNicN686915icJqgG96Ri02" target="_blank" rel="noopener">Buy the bundle</a></div><p class="addon">The best place to start for most businesses.</p>
         </article>
-        <article class="card">
+        <article id="profile-tune-up" class="card">
           <h4>Google Profile Tune-Up</h4>
           <div class="price">$249</div>
           <p class="desc">Your Google listing is often the first thing people see. We make sure it's complete and correct.</p>
@@ -309,7 +309,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/eVq3cw7257tGaBifC56Ri03" target="_blank" rel="noopener">Buy the tune-up</a></div><p class="addon">You keep ownership. We're added as a manager.</p>
         </article>
-        <article class="card">
+        <article id="counter-card" class="card">
           <h4>Tap &amp; Link Counter Card</h4>
           <div class="price">$50 <small>or 2 for $90</small></div>
           <p class="desc">A 12 cm × 12 cm (about 4.7 in) NFC countertop sticker. Customers tap their phone and land on your review page.</p>
@@ -325,7 +325,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="group">
       <div class="group-title"><h3>Websites and apps</h3><span>One-time build, you own it</span></div>
       <div class="cards">
-        <article class="card">
+        <article id="starter-site" class="card">
           <h4>Starter Site</h4>
           <div class="price">$799</div>
           <p class="desc">One fast, polished page that tells people what you do and gets them to call.</p>
@@ -339,7 +339,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/4gM7sM1HLaFSaBiey16Ri04" target="_blank" rel="noopener">Pay $400 deposit</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/dRm8wQ86929m6l24Xr6Ri05" target="_blank" rel="noopener">Pay $799 in full</a></div><p class="addon">Ready in about a week once we have your photos and info. Deposit balance is invoiced at launch.</p>
         </article>
-        <article class="card">
+        <article id="business-site" class="card">
           <h4>Business Site</h4>
           <div class="price">$1,499</div>
           <p class="desc">Room for everything: separate service pages, a menu or price list, and booking.</p>
@@ -352,7 +352,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/fZu00k8695ly7p6fC56Ri06" target="_blank" rel="noopener">Pay $750 deposit</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/eVqfZiaeh3dq5gY2Pj6Ri07" target="_blank" rel="noopener">Pay $1,499 in full</a></div><p class="addon">Domain registration is billed at cost, usually $12–20 a year. Deposit balance is invoiced at launch.</p>
         </article>
-        <article class="card">
+        <article id="custom-app" class="card">
           <h4>Custom App</h4>
           <div class="price" style="font-size:30px">Quoted per project</div>
           <p class="desc">An iPhone and Android app for your customers or your crew: booking, loyalty, job tracking, whatever your business runs on.</p>
@@ -369,7 +369,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="group">
       <div class="group-title"><h3>Tech support, training and smart home</h3><span>For homes and businesses</span></div>
       <div class="cards">
-        <article class="card">
+        <article id="tech-support" class="card">
           <h4>Tech Support</h4>
           <div class="price">$60<small>/hour</small></div>
           <p class="desc">Help at your home or business with the tech that's getting in your way.</p>
@@ -382,7 +382,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/5kQ9AU0DHaFS10I9dH6Ri0a" target="_blank" rel="noopener">Book tech support</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/7sYfZicmp01e10IahL6Ri0c" target="_blank" rel="noopener">Senior rate: $30 first hour</a></div>
           <p class="addon">Pay for the hours you expect. If it takes less time, we refund the difference.</p>
         </article>
-        <article class="card">
+        <article id="training" class="card">
           <h4>Training</h4>
           <div class="price">$75<small>/hour</small></div>
           <p class="desc">One-on-one lessons at your pace, for you or your staff. Nobody gets rushed.</p>
@@ -395,7 +395,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/9B6eVe3PTaFS6l24Xr6Ri0b" target="_blank" rel="noopener">Book training</a><a class="btn btn-ghost buy" href="https://buy.stripe.com/00w00k2LPg0c7p6fC56Ri0d" target="_blank" rel="noopener">Senior rate: $37.50 first hour</a></div>
           <p class="addon">Seniors 65 and older get 50% off the first hour of tech support or training.</p>
         </article>
-        <article class="card">
+        <article id="smart-home" class="card">
           <h4>Smart Home Setup</h4>
           <div class="price">$149</div>
           <p class="desc">Your new gadgets installed, connected and working together, with a walkthrough so you know how to use them.</p>
@@ -414,7 +414,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
     <div class="group">
       <div class="group-title"><h3>Ongoing care</h3><span>Monthly, cancel anytime</span></div>
       <div class="cards two">
-        <article class="card">
+        <article id="care" class="card">
           <h4>Care</h4>
           <div class="price">$49<small>/month</small></div>
           <p class="desc">Hosting and upkeep so your site and listing stay current.</p>
@@ -425,7 +425,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
           </ul>
           <div class="buys"><a class="btn btn-primary buy" href="https://buy.stripe.com/14AeVe1HLaFS4cU3Tn6Ri08" target="_blank" rel="noopener">Start Care</a></div>
         </article>
-        <article class="card">
+        <article id="care-plus" class="card">
           <h4>Care Plus</h4>
           <div class="price">$99<small>/month</small></div>
           <p class="desc">For businesses that want their Google profile active every month.</p>
