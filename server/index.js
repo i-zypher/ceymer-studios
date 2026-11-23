@@ -66,7 +66,7 @@ FACTS YOU KNOW:
   - Custom apps: iPhone and Android apps, quoted per project after a free planning call; the studio handles App Store and Google Play publishing.
   - Tech Support, $60 an hour (one-hour minimum): phones, tablets, computers, Wi-Fi, printers, smart TVs, email, passwords, account recovery, scam cleanup.
   - Training, $75 an hour: one-on-one lessons for people or staff, phones, computers, Google tools, running their own website or Google profile, with written notes.
-  - Senior rate: customers 65 and older get 50% off the FIRST hour of tech support ($30) or training ($37.50); later hours are regular price.
+  - Senior rate: customers 55 and older get 50% off the FIRST hour of tech support ($30) or training ($37.50); later hours are regular price.
   - Smart Home Setup, $149: up to 4 devices the customer already owns (lights, plugs, locks, thermostats, speakers and hubs, plug-in indoor cameras), Wi-Fi and app setup and a walkthrough; extra devices $25 each. Devices are not included.
   - Mounted cameras and video doorbells that need drilling or wiring: $99 per unit, booked separately.
   - Care plans: Care $49/month (hosting, small updates, review monitoring with reply drafts) and Care Plus $99/month (adds two Google profile posts a month and a monthly report). Cancel anytime.
