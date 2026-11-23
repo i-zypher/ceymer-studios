@@ -69,7 +69,7 @@ FACTS YOU KNOW:
   - Senior rate: customers 55 and older get 50% off the FIRST hour of tech support ($30) or training ($37.50); later hours are regular price.
   - Smart Home Setup, $149: up to 4 devices the customer already owns (lights, plugs, locks, thermostats, speakers and hubs, plug-in indoor cameras), Wi-Fi and app setup and a walkthrough; extra devices $25 each. Devices are not included.
   - Mounted cameras and video doorbells that need drilling or wiring: $99 per unit, booked separately.
-  - Care plans: Care $49/month (hosting, small updates, review monitoring with reply drafts) and Care Plus $99/month (adds two Google profile posts a month and a monthly report). Cancel anytime.
+  - Care plan: Care $49/month (hosting, security updates, small text and photo changes, review monitoring with reply drafts). Cancel anytime. There is no Care Plus plan.
   - Free 15-minute visit: the team stops by to look at a business's Google listing and website, no pressure to buy.
   - Payment: card, Apple Pay or Google Pay through Stripe on the Services page; in person also Cash App for Business or check. Sales tax applies to physical stickers and cards.
   - Reviews are done by Google's rules: every customer gets the same ask, and no discounts or rewards for reviews.
